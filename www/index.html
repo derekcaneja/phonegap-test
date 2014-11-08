@@ -26,7 +26,7 @@
                 </ul>
             </sidebar>
             <div id="main">
-                <header class="row">
+                <header class="row header">
                     <div class="column">
                         <i id="openSidebar" class="fa fa-bars"></i>
                     </div>
@@ -275,6 +275,13 @@
                     <i class="fa fa-sliders"></i><h3>Filter results</h3>
                 </footer>
             </div>
+            <div class="second">
+                <div class="header">
+                 <div class="column">
+                        <i id="backToMain" class="fa fa-arrow-left"></i>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -306,11 +313,27 @@
                     $('#main').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 350 }, {easing: 'easeOut'})
                     setTimeout(function(){
                         $('#main').attr('style', '');
-                    },400)
+                    },350)
                 }
                 
             })
+            var searchIcon = new Hammer($('#openSearch')[0]);
+            searchIcon.on('tap', function(ev){
+                console.log("Open Search")
+            })
 
+            $('.post').mouseup(function(ev){
+                $('.app').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+                 // setTimeout(function(){
+                 //        $('.app').attr('style', '');
+                 //    },250)
+            }); 
+            $('#backToMain').mouseup(function(ev){
+                $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+                setTimeout(function(){
+                        $('.app').attr('style', '');
+                    },300)
+            })
             // var resultsScroll = new Hammer($('.results')[0],{preventDefault:true});
             // resultsScroll.on("dragup dragdown swipeup swipedown",function(ev){
             //     //console.log("PANNING UP")
@@ -318,10 +341,7 @@
             //     $('.results').velocity({translateY: xDiff})
             // })
 
-            // var searchIcon = new Hammer($('#openSearch')[0]);
-            // searchIcon.on('tap', function(ev){
-            //     console.log("Open Search")
-            // })
+            
         // });
         </script>
     </body>
