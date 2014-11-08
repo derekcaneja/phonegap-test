@@ -84,7 +84,7 @@ var rideFn = {
 			return savings
 		})
 		.error( function() { console.log('calculate savings y u no work')})
-	}
+	},
 
 	// http://davidwalsh.name/convert-xml-json
   xmlToJson: function(xml) {
@@ -123,7 +123,7 @@ var rideFn = {
 			}
 		}
 		return obj;
-	};
+	}
 
 }
 
