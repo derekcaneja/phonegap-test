@@ -1,0 +1,108 @@
+@import "normalize.css";
+@import "_mixins.scss";
+
+$sansSerif: 'proxima-nova', sans-serif;
+
+
+$mainGreenGray: rgba(51, 110, 123,1);
+$paleRed: rgba(214, 69, 65,1);
+*{
+	@include border-box();
+	font-family: $sansSerif;
+    
+
+	-webkit-backface-visibility: hidden;
+}
+
+html,body{
+	width: 100%;
+	height: 100%; 
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+h1,h2,h3,h4,h5,h6{
+	margin: 0;
+}
+body{
+	height: 100vh;
+}
+
+
+.app{
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	left:0;
+}
+
+sidebar{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 60vw;
+	background: $mainGreenGray;
+	height: 100%;
+	z-index: 1;
+}
+header{
+	width: 100%;
+	height: 60px;
+	padding: 12px;
+	border-bottom: 1px solid $mainGreenGray;
+	color: $mainGreenGray;
+	i{
+		height: 100%;
+		text-align: center;
+		padding-top: 4px;
+		font-size: 32px;
+	}
+	.column:last-of-type{
+		float: right;
+		i{
+			padding-top: 2px;
+		}
+	}
+}
+
+footer{
+	position: absolute;
+	bottom: 0;
+	padding:10px;
+	background: $paleRed;
+	text-align: center;
+	color: #fff;
+	*{
+		display: inline-block;
+		vertical-align: middle;
+	}
+	h3{
+		font-weight: 300;
+	}
+	i{
+		margin-right: 8px;
+	}
+}
+
+.column{
+	height: 100%;
+	display: inline-block;
+	vertical-align: middle;
+}
+.row{
+	width: 100%;
+}
+
+
+
+.main{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index:2;
+	overflow: hidden;
+	background: #fff;
+}
