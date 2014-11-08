@@ -19,6 +19,7 @@
 var app = {
     // Application Constructor
     initialize: function() {
+        var _this = this;
         this.currentUser = null;
         
         this.bindEvents();
@@ -30,9 +31,9 @@ var app = {
         this.sidebarIcon.on('tap', this.toggleSidebar);
         this.searchIcon.on('tap', this.toggleSearch);
         this.backIcon.on('tap', this.backToMain);
-        $('.post').each(function(){
-            this.indivPost = new Hammer($('.post')[0]);
-        })
+        // $('.post').each(function(){
+        //     this.indivPost = new Hammer($('.post')[0]);
+        // })
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
@@ -41,8 +42,7 @@ var app = {
 
         $('.post').mouseup(function(ev){
             if($('sidebar').prop('open')){
-                    this.toggleSidebar;
-                    return false;
+                    _this.toggleSidebar();
                 }else{
                     $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
                 }
@@ -142,7 +142,7 @@ var app = {
             $('sidebar').prop('open', true);
         } else {
             $('#main').velocity({ translateX: 0, scale3d: [1, 1, 1], rotateZ: 0,translateZ: 0}, { duration: 350 }, { easing: 'easeOut' })
-            
+            console.log("CLOSE")
             setTimeout(function(){
                 $('#main').attr('style', '');
             }, 350)

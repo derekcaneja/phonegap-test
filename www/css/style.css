@@ -132,7 +132,8 @@ footer {
     display: inline-block;
     vertical-align: middle; }
   footer h3 {
-    font-weight: 300; }
+    font-weight: 300;
+    letter-spacing: 1.6px; }
   footer i {
     margin-right: 8px; }
 
@@ -202,7 +203,7 @@ footer {
     .post .location .fa-level-down {
       margin-left: 8px; }
   .post .driver-info {
-    padding: 0 0 4px 0; }
+    padding: 12px 0 4px 0; }
     .post .driver-info * {
       font-weight: 400; }
     .post .driver-info h4 {
