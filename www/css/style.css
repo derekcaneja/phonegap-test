@@ -78,11 +78,13 @@ sidebar {
       background: rgba(255, 255, 255, 0.3); }
 
 header {
-  position: absolute;
+  position: fixed;
+  -webkit-transform: translateZ(0);
   top: 0;
   left: 0;
   width: 100%;
   height: 60px;
+  background: #fff;
   padding: 12px;
   color: #336e7b; }
   header i {
@@ -96,13 +98,13 @@ header {
       padding-top: 2px; }
 
 .floating-date {
-  text-align: center;
-  padding: 4px 0;
-  background: rgba(239, 244, 245, 0.5);
-  color: #aac5ca; }
+  text-align: left;
+  padding: 4px 12px;
+  color: #aac5ca;
+  display: none; }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   padding: 10px;
   background: #d64541;
@@ -116,15 +118,15 @@ footer {
   footer i {
     margin-right: 8px; }
 
-.main {
+#main {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   z-index: 2;
-  overflow: hidden;
-  background: #fff; }
+  background: #fff;
+  overflow: auto; }
 
 .logo {
   width: 100%;
@@ -150,9 +152,11 @@ footer {
   border-bottom: 1px solid rgba(51, 110, 123, 0.5);
   min-height: 160px; }
   .post .column:nth-of-type(1) {
-    width: 68.8vw; }
+    width: 63.8vw;
+    vertical-align: bottom; }
   .post .column:nth-of-type(2) {
-    width: 30vw; }
+    width: 35vw;
+    vertical-align: bottom; }
   .post .location {
     padding: 12px 0 0 18px;
     color: #333; }
@@ -162,10 +166,16 @@ footer {
       vertical-align: bottom; }
     .post .location .fa-level-down {
       margin-left: 8px; }
-  .post .driver-info * {
-    font-weight: 400; }
+  .post .driver-info {
+    padding: 0 0 4px 0; }
+    .post .driver-info * {
+      font-weight: 400; }
+    .post .driver-info h4 {
+      margin: 3px auto 3px auto; }
+    .post .driver-info h6 {
+      font-size: 13px !important; }
   .post .time-estimate {
-    margin: 6px auto 18px auto; }
+    margin: 6px auto 17px auto; }
     .post .time-estimate * {
       display: inline-block;
       vertical-align: middle;
