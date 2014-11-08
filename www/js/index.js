@@ -19,8 +19,20 @@
 var app = {
     // Application Constructor
     initialize: function() {
+        this.currentUser = null;
         
         this.bindEvents();
+
+        this.sidebarIcon = new Hammer($('#openSidebar')[0]);
+
+        this.sidebarIcon.on('tap', this.toggleSidebar);
+
+        $('.profile-select').on('click', this.setProfilePicture);
+
+        $('header i').css('width', $('header').height());
+        //$('.results').css('height', $(window).height() - $('header').height() - $('footer').height())
+        $('.driver-image').css('height', $('.driver-image').width());
+
     },
     // Bind Event Listeners
     //
@@ -46,6 +58,80 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    createUser: function() {
+        FB.api('/me?fields=first_name,last_name,education{type,school{name}},work{employer{name}},birthday,gender', function(response) {
+            var user = response;
+        
+            user.work      = response.work[0]['employer']['name'];
+            user.education = response.education[0]['school']['name'];
+          
+            console.log(user)
+          
+            Server.post('user', user, function(err) {
+                if(err) console.log(err);
+                else    console.log('User created!');
+            });
+        });  
+    },
+
+    authenticateUser: function(id) {
+        Server.get('user', { id: id }, function(err) {
+
+        });
+    },
+
+    selectProfilePicture: function() {
+        FB.api('/me/albums?fields=name', function(response){
+            for (var i = 0; i < response.data.length; i++){
+                if (response.data[i]['name'] == 'Profile Pictures'){
+                    profilePics = res.data[i]['id'];
+                    
+                    FB.api('/'+ profilePics + '/photos?fields=images{source}', function(res){
+                        var ul = document.getElementById('albums');
+
+                        for( var i = 0; i < 5; i++ ) {
+                            var li   = document.createElement('li')
+                            var img = document.createElement('img')
+                            
+                            img.src = res.data[i]['images'][3]['source'];
+                            img.setAttribute('class','profile-select');
+                            
+                            li.appendChild(img);
+                            ul.appendChild(li);
+                        }
+                    
+                    });
+
+                    break;
+                }
+            }
+        });
+    },
+
+    setProfilePicture: function(object) {
+        Server.put('user', { id: app.currentUser.id, profile_picture: object.src }, function(err,res){
+            console.log('err',err)
+            console.log('res',res)
+        });
+    },
+
+    toggleSidebar: function(ev){
+        var isOpen       = $('sidebar').prop('open');
+        var sidebarWidth = $('sidebar').width();
+        
+        if(!isOpen){
+            $('#main').velocity({ translateX: sidebarWidth, scale3d: [1,1,1], rotateZ: 0, translateZ: 0}, { duration: 350 }, { easing: 'easeOut'});
+        } else {
+            $('#main').velocity({ translateX: 0, scale3d: [1, 1, 1], rotateZ: 0,translateZ: 0}, { duration: 350 }, { easing: 'easeOut' })
+            
+            setTimeout(function(){
+                $('#main').attr('style', '');
+            }, 400)
+        }
+        
+        $('sidebar').prop('open', !isOpen);
     }
 };
 

@@ -1,6 +1,6 @@
 var Server = {};
 
-Server.API = 'http://ride-supply-server.herokuapp.com/api';
+Server.API = 'http://localhost:5555/api';
 
 Server.get = function(table, data, callback) {
 	if(arguments.length == 3) {
@@ -12,7 +12,7 @@ Server.get = function(table, data, callback) {
 				callback(null, data);
 			},
 			error: function(err) {
-				calback(err);
+				callback(err);
 			}
 		});
 	} else {
@@ -23,13 +23,13 @@ Server.get = function(table, data, callback) {
 				callback(null, data);
 			},
 			error: function(err) {
-				calback(err);
+				callback(err);
 			}
 		});
 	}
 }
 
-Server.set = function(table, data, callback) {
+Server.post = function(table, data, callback) {
 	$.ajax({
 		url  : Server.API + '/' + table,
 		type : 'POST',
@@ -38,7 +38,21 @@ Server.set = function(table, data, callback) {
 			callback(null, data);
 		},
 		error: function(err) {
-			calback(err);
+			callback(err);
+		}
+	});
+}
+
+Server.put = function(table, data, callback) {
+	$.ajax({
+		url  : Server.API + '/' + table,
+		type : 'PUT',
+		data : data,
+		success: function(data) {
+			callback(null, data);
+		},
+		error: function(err) {
+			callback(err);
 		}
 	});
 }
@@ -52,7 +66,7 @@ Server.delete = function(table, data, callback) {
 			callback(null, data);
 		},
 		error: function(err) {
-			calback(err);
+			callback(err);
 		}
 	});
 }
