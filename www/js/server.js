@@ -1,6 +1,6 @@
 var Server = {};
 
-Server.API = 'http://ride-supply-server.herokuapp.com/api';
+Server.API = 'http://localhost:5555/api';
 
 Server.get = function(table, data, callback) {
 	if(arguments.length == 3) {
@@ -29,8 +29,7 @@ Server.get = function(table, data, callback) {
 	}
 }
 
-
-Server.create = function(table, data, callback) {
+Server.post = function(table, data, callback) {
 	$.ajax({
 		url  : Server.API + '/' + table,
 		type : 'POST',
@@ -44,7 +43,7 @@ Server.create = function(table, data, callback) {
 	});
 }
 
-Server.set = function(table, data, callback) {
+Server.put = function(table, data, callback) {
 	$.ajax({
 		url  : Server.API + '/' + table,
 		type : 'PUT',
