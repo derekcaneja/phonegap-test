@@ -138,9 +138,9 @@ header{
 .floating-date{
 	text-align: center;
 	padding: 4px 0;
-	background: #eff4f5;
-	color: $mainGreenGray;
-	border-bottom: 1px solid darken(#eff4f5,2%)
+	background: rgba(#eff4f5,0.5);
+	color: darken(#eff4f5,22%);
+	
 }
 
 footer{
@@ -204,23 +204,17 @@ footer{
 	width: 100vw;
 	min-height: 200px;
 	border-bottom: 1px solid rgba($mainGreenGray,0.5);
-	.top{
-		max-height: 120px;
-		.column{
-			&:nth-of-type(1){
-				width: 68.8vw;
-			}
-			&:nth-of-type(2){
-				width: 30vw;
-			}
+	min-height: 160px;
+	.column{
+		&:nth-of-type(1){
+			width: 68.8vw;
+		}
+		&:nth-of-type(2){
+			width: 30vw;
 		}
 	}
-	.bottom{
-		min-height: 120px;
-
-	}
 	.location{
-		padding: 18px 0 18px 18px;
+		padding: 12px 0 0 18px;
 		color: #333;
 		h4,.fa-level-down{
 			display: inline-block;
@@ -247,17 +241,55 @@ footer{
 			margin: 0 6px 0 0;
 		}
 	}
-	.seat-availability{
-		margin: 6px auto 0 auto;
+	.price,.seat-availability{
+		margin-top: 0px;
+		height: 50px;
+		text-align: center;
+		vertical-align: middle !important;
+		.row{
+			height: 100%;
+			display: table;
+			div{
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+	}
+	.price {
+		color: #555;
+		width: 40% !important;
+		border-right: 1px solid rgba($mainGreenGray,0.3);
+		h1{
+			font-weight: 400;
+			font-size: 30px !important;
+		}
 		i{
-			display: inline-block;
+			font-size: 19px !important
+		}
+		h1,i{
+			display:inline-block;
 			vertical-align: middle;
-			margin-right: 4px;
-			font-size: 18px !important;
 		}
-		span{
+	}
+	.seat-availability{
+		width: 35% !important;
+		color: #888;
+		h3{
 			width: 100%;
+			line-height: 19px;
+			font-size: 21px !important
 		}
+		*{
+			font-weight: 200 !important;
+		}
+		//margin: 6px auto 0 auto;
+		// i{
+		// 	display: inline-block;
+		// 	vertical-align: middle;
+		// 	margin-right: 4px;
+		// 	font-size: 18px !important;
+		// }
+		
 	}
 }
 .driver-image{

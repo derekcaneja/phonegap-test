@@ -98,9 +98,8 @@ header {
 .floating-date {
   text-align: center;
   padding: 4px 0;
-  background: #eff4f5;
-  color: #336e7b;
-  border-bottom: 1px solid #e9f0f1; }
+  background: rgba(239, 244, 245, 0.5);
+  color: #aac5ca; }
 
 footer {
   position: absolute;
@@ -148,17 +147,14 @@ footer {
 .post {
   width: 100vw;
   min-height: 200px;
-  border-bottom: 1px solid rgba(51, 110, 123, 0.5); }
-  .post .top {
-    max-height: 120px; }
-    .post .top .column:nth-of-type(1) {
-      width: 68.8vw; }
-    .post .top .column:nth-of-type(2) {
-      width: 30vw; }
-  .post .bottom {
-    min-height: 120px; }
+  border-bottom: 1px solid rgba(51, 110, 123, 0.5);
+  min-height: 160px; }
+  .post .column:nth-of-type(1) {
+    width: 68.8vw; }
+  .post .column:nth-of-type(2) {
+    width: 30vw; }
   .post .location {
-    padding: 18px 0 18px 18px;
+    padding: 12px 0 0 18px;
     color: #333; }
     .post .location h4, .post .location .fa-level-down {
       display: inline-block;
@@ -176,15 +172,38 @@ footer {
       font-size: 15px !important; }
     .post .time-estimate i {
       margin: 0 6px 0 0; }
-  .post .seat-availability {
-    margin: 6px auto 0 auto; }
-    .post .seat-availability i {
+  .post .price, .post .seat-availability {
+    margin-top: 0px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle !important; }
+    .post .price .row, .post .seat-availability .row {
+      height: 100%;
+      display: table; }
+      .post .price .row div, .post .seat-availability .row div {
+        display: table-cell;
+        vertical-align: middle; }
+  .post .price {
+    color: #555;
+    width: 40% !important;
+    border-right: 1px solid rgba(51, 110, 123, 0.3); }
+    .post .price h1 {
+      font-weight: 400;
+      font-size: 30px !important; }
+    .post .price i {
+      font-size: 19px !important; }
+    .post .price h1, .post .price i {
       display: inline-block;
-      vertical-align: middle;
-      margin-right: 4px;
-      font-size: 18px !important; }
-    .post .seat-availability span {
-      width: 100%; }
+      vertical-align: middle; }
+  .post .seat-availability {
+    width: 35% !important;
+    color: #888; }
+    .post .seat-availability h3 {
+      width: 100%;
+      line-height: 19px;
+      font-size: 21px !important; }
+    .post .seat-availability * {
+      font-weight: 200 !important; }
 
 .driver-image {
   background-image: url("../img/user-profile-picture.jpg");
