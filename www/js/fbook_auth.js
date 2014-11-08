@@ -19,23 +19,23 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
+  FB.getLoginStatus(function(res) {
+    statusChangeCallback(res);
   });
 }
 
-FB.getLoginStatus(function(response) {
-  if (response.status === 'connected') {
-    console.log("yr token", response.authResponse.accessToken);
+FB.getLoginStatus(function(res) {
+  if (res.status === 'connected') {
+    console.log("yr token", res.authResponse.accessToken);
   }
 });
 
 // This is called with the results from from FB.getLoginStatus().
-function statusChangeCallback(response) {
-  if (response.status === 'connected') {
-    findOrCreateUser(response.authResponse.userID);
+function statusChangeCallback(res) {
+  if (res.status === 'connected') {
+    findOrCreateUser(res.authResponse.userID);
   } 
-  else if (response.status === 'not_authorized') {
+  else if (res.status === 'not_authorized') {
    $('#status').innerHTML = 'Please log into this app.';
   } 
   else {
@@ -49,20 +49,58 @@ function findOrCreateUser(userID) {
 };
 
 function createUser(){
-  FB.api("/me?fields=first_name,last_name,education{type,school{name}},work{employer{name}},birthday", 
-  function(response) {
-    Server.set('user', JSON.stringify(response), function(err, res){
-      
+  FB.api("/me?fields=first_name,last_name,education{type,school{name}},work{employer{name}},birthday, gender", 
+  function(res) {
+    Server.set('user', JSON.stringify(res), function(err, res){
+      console.log('how did i do?')
     })
+    selectPhoto();
   });
 };
 
-function userExists(userID){
-  Server.get('user', userID, function( err,res ){
-
+function selectPhoto(){
+  var profilePics;
+  FB.api("/me/albums?fields=name", function(res){
+      for (var i = 0; i < res.data.length; i++){
+        if (res.data[i]["name"] == "Profile Pictures"){
+          profilePics = res.data[i]["id"]
+          FB.api("/"+ profilePics + "/photos?fields=images{source}", function(res){
+            var ul = document.getElementById('albums');
+            for( var i = 0; i < 5; i++ ) {
+              var li = document.createElement('li')
+              var img = document.createElement('img')
+              img.src = res.data[i]["images"][3]["source"];
+              img.setAttribute('class','profile-select');
+              li.appendChild(img);
+              ul.appendChild(li);
+            }
+              $('.profile-select').on('click', function(){
+                photo = this.src
+                Server.set('user', {profile_photo: photo}, function(err,res){
+                  console.log('you work')
+                })
+              })
+          })
+        return
+      }
+    }
   })
+};
+
+function login(id){
+  currentUser = id 
+  window.location.href = "/home";
 }
 
-FB.logout(function(response) {
-  // LOGGED OUT
+function userExists(userID){
+  return false
+  // Server.get('user', {id: userID} , function( err,res ){
+
+  // })
+}
+
+FB.logout(function(res) {
+  currentUser = nil
+  window.location.href = "/login";
 });
+
