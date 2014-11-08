@@ -16,10 +16,13 @@
     <body>
         <div class="app">
             <sidebar open="false">
+                <div class="logo"><h1>RIDESUPPLY</h1></div>
                 <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li><a>Explore</a></li>
+                    <li><a>My Rides</a></li>
+                    <li><a>Add Ride</a></li>
+                    <li><a>Account Settings</a></li>
+                    <li><a>Logout</a></li>
                 </ul>
             </sidebar>
             <div class="main">
@@ -28,13 +31,52 @@
                         <i id="openSidebar" class="fa fa-bars"></i>
                     </div>
                      <div class="column">
-                        <i class="fa fa-search"></i>
+                        <i id="openSearch" class="fa fa-search"></i>
                     </div>
                 </header>
 
 
-                <section>
-
+                <section class="results">
+                    
+                    <div class="floating-date">
+                        <span>November 22, 2014</span>
+                    </div>
+                    <!-- <div class="date-selector">
+                        <button class=""
+                    </div> -->
+                    <div class="post">
+                        <section class="top row">
+                            <div class="column">
+                                <div class="location">
+                                    <div class="row">
+                                        <h4>Boston</h4>
+                                        <i class="fa fa-level-down"></i>
+                                        <h1>Montreal</h1>
+                                    </div>
+                                    <div class="row time-estimate">
+                                        <i class="fa fa-clock-o"></i>
+                                        <h6>Est. 5 hour ride</h6>
+                                    </div>
+                                    <div class="row seat-availability">
+                                        <i class="fa fa-circle"></i>
+                                        <i class="fa fa-circle-o"></i>
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>2 seats</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="driver-info">
+                                    <div class="driver-image"></div>
+                                    <h4>Kanye W.</h4>
+                                    <h6>Male, 37</h6>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="bottom row">
+                            
+                        </section>
+                    </div>
                 </section>
                 <footer class="row">
                     <i class="fa fa-sliders"></i><h3>Filter results</h3>
@@ -53,10 +95,12 @@
 
         <script>
             $('header i').css('width', $('header').height());
+            //$('.results').css('height', $(window).height() - $('header').height() - $('footer').height())
+            $('.driver-image').css('height', $('.driver-image').width());
+
             var sidebarIcon = new Hammer($('#openSidebar')[0]);
             sidebarIcon.on('tap', function(ev){
                 var isOpen = $('sidebar').prop('open');
-                console.log(isOpen)
                 if(!isOpen){
                     $('.main').velocity({translateX: $('sidebar').outerWidth(), scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 350 }, {easing: 'easeOut'})
                     $('sidebar').prop('open',true);
@@ -65,6 +109,11 @@
                     $('.main').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 350 }, {easing: 'easeOut'})
                 }
                 
+            })
+
+            var searchIcon = new Hammer($('#openSearch')[0]);
+            searchIcon.on('tap', function(ev){
+                console.log("Open Search")
             })
         </script>
     </body>
