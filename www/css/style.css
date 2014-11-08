@@ -128,6 +128,7 @@ footer {
   background: #fff;
   overflow: auto; }
 
+<<<<<<< HEAD
 .logo {
   width: 100%;
   height: 120px;
@@ -225,3 +226,7 @@ footer {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px; }
+
+.profile-select {
+  height: 200px !important;
+}
