@@ -50,7 +50,7 @@ body {
 
 .app {
   height: 100vh;
-  width: 100vw;
+  width: 200vw;
   position: absolute;
   top: 0;
   left: 0; }
@@ -77,25 +77,24 @@ sidebar {
       padding: 8px 12px;
       background: rgba(255, 255, 255, 0.3); }
 
-header {
+header i {
+  height: 100%;
+  text-align: center;
+  padding-top: 4px;
+  font-size: 32px; }
+header .column:last-of-type {
+  float: right; }
+  header .column:last-of-type i {
+    padding-top: 2px; }
+
+.header, header {
   position: fixed;
-  -webkit-transform: translateZ(0);
   top: 0;
-  left: 0;
   width: 100%;
   height: 60px;
   background: #fff;
   padding: 12px;
   color: #336e7b; }
-  header i {
-    height: 100%;
-    text-align: center;
-    padding-top: 4px;
-    font-size: 32px; }
-  header .column:last-of-type {
-    float: right; }
-    header .column:last-of-type i {
-      padding-top: 2px; }
 
 .floating-date {
   text-align: left;
@@ -123,12 +122,13 @@ footer {
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   z-index: 2;
   background: #fff;
   overflow: auto; }
+  #main * {
+    max-width: 100vw; }
 
-<<<<<<< HEAD
 .logo {
   width: 100%;
   height: 120px;
@@ -143,9 +143,18 @@ footer {
     font-weight: 300;
     letter-spacing: 2px; }
 
+.second {
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 100vw; }
+  .second i {
+    font-size: 32px; }
+
 .results {
   width: 100vw;
-  padding-top: 60px; }
+  padding-top: 60px;
+  -webkit-overflow-scrolling: touch; }
 
 .post {
   width: 100vw;
@@ -222,11 +231,7 @@ footer {
   background-repeat: no-repeat;
   background-size: 100% auto;
   height: 30vw;
-  width: 100%;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px; }
-
-.profile-select {
-  height: 200px !important;
-}
+  width: 90%;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px; }

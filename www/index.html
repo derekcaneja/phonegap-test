@@ -29,7 +29,7 @@
                 </ul>
             </sidebar>
             <div id="main">
-                <header class="row">
+                <header class="row header">
                     <div class="column">
                         <i id="openSidebar" class="fa fa-bars"></i>
                     </div>
@@ -278,6 +278,13 @@
                     <i class="fa fa-sliders"></i><h3>Filter results</h3>
                 </footer>
             </div>
+            <div class="second">
+                <div class="header">
+                 <div class="column">
+                        <i id="backToMain" class="fa fa-arrow-left"></i>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -302,8 +309,8 @@
                     version    : 'v2.2'
                 });
             };
-
-              // Load the Facebook SDK asynchronously
+            
+            // Load the Facebook SDK asynchronously
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
@@ -312,16 +319,12 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
 
+            
             // var resultsScroll = new Hammer($('.results')[0],{preventDefault:true});
             // resultsScroll.on("dragup dragdown swipeup swipedown",function(ev){
             //     //console.log("PANNING UP")
             //     var xDiff = $('.results').xPos;
             //     $('.results').velocity({translateY: xDiff})
-            // })
-
-            // var searchIcon = new Hammer($('#openSearch')[0]);
-            // searchIcon.on('tap', function(ev){
-            //     console.log("Open Search")
             // })
         </script>
     </body>

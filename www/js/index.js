@@ -24,14 +24,30 @@ var app = {
         this.bindEvents();
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
+        this.searchIcon  = new Hammer($('#openSearch')[0]);
 
         this.sidebarIcon.on('tap', this.toggleSidebar);
+        this.searchIcon.on('tap', this.toggleSearch);
 
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
         //$('.results').css('height', $(window).height() - $('header').height() - $('footer').height())
         $('.driver-image').css('height', $('.driver-image').width());
+
+        $('.post').mouseup(function(ev){
+            $('.app').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+             // setTimeout(function(){
+             //        $('.app').attr('style', '');
+             //    },250)
+        }); 
+        
+        $('#backToMain').mouseup(function(ev){
+            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            setTimeout(function(){
+                    $('.app').attr('style', '');
+                },300)
+        })
 
     },
     // Bind Event Listeners
@@ -132,6 +148,10 @@ var app = {
         }
         
         $('sidebar').prop('open', !isOpen);
+    },
+
+    toggleSearch: function(ev) {
+        console.log('search')
     }
 };
 
