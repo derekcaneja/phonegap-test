@@ -274,7 +274,7 @@
                         </section>
                     </div>
                 </section>
-                <footer class="row">
+                <footer class="row footer">
                     <i class="fa fa-sliders"></i><h3>Filter results</h3>
                 </footer>
             </div>
@@ -301,16 +301,21 @@
         // $(document).ready(function(){
 
             $('header i').css('width', $('header').height());
-            //$('.results').css('height', $(window).height() - $('header').height() - $('footer').height())
+            $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
             $('.driver-image').css('height', $('.driver-image').width());
 
             var sidebarIcon = new Hammer($('#openSidebar')[0]);
             sidebarIcon.on('tap', function(ev){
-                var isOpen = $('sidebar').prop('open');
                 var sidebarWidth = $('sidebar').width();
+                var isOpen = $('sidebar').prop('open');
+
+                $('.app').attr('style', '');
+
+                console.log('sidebaricon mouseup')
                 if(!isOpen){
                     $('#main').velocity({translateX: sidebarWidth, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 350 }, {easing: 'easeOut'});
                     $('sidebar').prop('open',true);
+
                 }else{
                     $('sidebar').prop('open',false);
                     $('#main').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 350 }, {easing: 'easeOut'})
@@ -323,18 +328,33 @@
             var searchIcon = new Hammer($('#openSearch')[0]);
             searchIcon.on('tap', function(ev){
                 console.log("Open Search")
+
             })
 
             $('.post').mouseup(function(ev){
-                $('.app').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+                if($('sidebar').prop('open')){
+                     $('sidebar').prop('open',false);
+                    $('#main').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 350 }, {easing: 'easeOut'})
+                    setTimeout(function(){
+                        $('#main').attr('style', '');
+                    },350)
+                    return false;
+                }else{
+                    $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+                    console.log('.post mouseup')
+                }
+                
                  // setTimeout(function(){
                  //        $('.app').attr('style', '');
                  //    },250)
             }); 
             $('#backToMain').mouseup(function(ev){
-                $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+                $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+                
+                console.log('#backToMain mouseup')
                 setTimeout(function(){
                         $('.app').attr('style', '');
+
                     },300)
             })
             // var resultsScroll = new Hammer($('.results')[0],{preventDefault:true});
