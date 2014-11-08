@@ -16,8 +16,37 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0; }
 
+ul {
+  margin: 0;
+  padding: 0; }
+
 body {
   height: 100vh; }
+
+.resetFontSize p, .column * p, .resetFontSize span, .column * span, .resetFontSize i, .column * i {
+  font-size: 14px !important; }
+.resetFontSize h1, .column * h1 {
+  font-size: 36px !important; }
+.resetFontSize h2, .column * h2 {
+  font-size: 30px !important; }
+.resetFontSize h3, .column * h3 {
+  font-size: 24px !important; }
+.resetFontSize h4, .column * h4 {
+  font-size: 18px !important; }
+.resetFontSize h5, .column * h5 {
+  font-size: 14px !important; }
+.resetFontSize h6, .column * h6 {
+  font-size: 12px !important; }
+
+.column {
+  height: 100%;
+  display: inline-block;
+  font-size: 0;
+  margin: 0;
+  vertical-align: top; }
+
+.row {
+  width: 100%; }
 
 .app {
   height: 100vh;
@@ -30,16 +59,31 @@ sidebar {
   position: absolute;
   top: 0;
   left: 0;
-  width: 60vw;
+  width: 80vw;
   background: #336e7b;
   height: 100%;
   z-index: 1; }
+  sidebar li {
+    width: 100%;
+    display: table; }
+    sidebar li * {
+      display: table-cell;
+      vertical-align: middle; }
+    sidebar li:nth-of-type(even) a {
+      background: rgba(255, 255, 255, 0.2); }
+    sidebar li a {
+      height: 60px;
+      width: 100%;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.3); }
 
 header {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   padding: 12px;
-  border-bottom: 1px solid #336e7b;
   color: #336e7b; }
   header i {
     height: 100%;
@@ -50,6 +94,12 @@ header {
     float: right; }
     header .column:last-of-type i {
       padding-top: 2px; }
+
+.floating-date {
+  text-align: center;
+  padding: 4px 0;
+  background: rgba(239, 244, 245, 0.5);
+  color: #aac5ca; }
 
 footer {
   position: absolute;
@@ -66,14 +116,6 @@ footer {
   footer i {
     margin-right: 8px; }
 
-.column {
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle; }
-
-.row {
-  width: 100%; }
-
 .main {
   position: absolute;
   top: 0;
@@ -83,3 +125,98 @@ footer {
   z-index: 2;
   overflow: hidden;
   background: #fff; }
+
+<<<<<<< HEAD
+.logo {
+  width: 100%;
+  height: 120px;
+  text-align: left;
+  padding: 14px;
+  display: table; }
+  .logo h1 {
+    display: table-cell;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 2px; }
+
+.results {
+  width: 100vw;
+  padding-top: 60px; }
+
+.post {
+  width: 100vw;
+  min-height: 200px;
+  border-bottom: 1px solid rgba(51, 110, 123, 0.5);
+  min-height: 160px; }
+  .post .column:nth-of-type(1) {
+    width: 68.8vw; }
+  .post .column:nth-of-type(2) {
+    width: 30vw; }
+  .post .location {
+    padding: 12px 0 0 18px;
+    color: #333; }
+    .post .location h4, .post .location .fa-level-down {
+      display: inline-block;
+      color: #444;
+      vertical-align: bottom; }
+    .post .location .fa-level-down {
+      margin-left: 8px; }
+  .post .driver-info * {
+    font-weight: 400; }
+  .post .time-estimate {
+    margin: 6px auto 18px auto; }
+    .post .time-estimate * {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 15px !important; }
+    .post .time-estimate i {
+      margin: 0 6px 0 0; }
+  .post .price, .post .seat-availability {
+    margin-top: 0px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle !important; }
+    .post .price .row, .post .seat-availability .row {
+      height: 100%;
+      display: table; }
+      .post .price .row div, .post .seat-availability .row div {
+        display: table-cell;
+        vertical-align: middle; }
+  .post .price {
+    color: #555;
+    width: 40% !important;
+    border-right: 1px solid rgba(51, 110, 123, 0.3); }
+    .post .price h1 {
+      font-weight: 400;
+      font-size: 30px !important; }
+    .post .price i {
+      font-size: 19px !important; }
+    .post .price h1, .post .price i {
+      display: inline-block;
+      vertical-align: middle; }
+  .post .seat-availability {
+    width: 35% !important;
+    color: #888; }
+    .post .seat-availability h3 {
+      width: 100%;
+      line-height: 19px;
+      font-size: 21px !important; }
+    .post .seat-availability * {
+      font-weight: 200 !important; }
+
+.driver-image {
+  background-image: url("../img/user-profile-picture.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  height: 30vw;
+  width: 100%;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px; }
+
+.profile-select {
+  height: 200px !important;
+}
