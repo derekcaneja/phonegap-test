@@ -27,7 +27,7 @@ var rideFn = {
 			updateRide(rideParams)
 		})
 		.error( function(){
-			console.log('it did not work')
+			console.log('calc distance did not work')
 		})
 	},
 
@@ -61,19 +61,13 @@ var rideFn = {
 		.success( function(res){
 			return xmlToJson(res)["fuelPrices"]["regular"]
 		})
-		.error( function(){ console.log('gas price y u no work>')})
+		.error( function(){ console.log('gas price y u no work?')})
 	},
 
 	calculateSavings: function(ride){
-		var begin = ride.begin_date
-		var d = new Date(begin)
+		var d = new Date(ride.begin_date)
 		d = d.setDate(d.getDate() + 2 )
 	  var end_date = new Date(d)
-
-	  var url = "http://api.sandbox.amadeus.com/v1.2/cars/search-circle"\
-							"?apikey=biyR76JCtDlFZsQ8hSFLnx4Ea4dEAYOt"\
-							"&pick_up=#{ride.begin_date}"\
-							"&drop_off=#{end_date}"\
 
 		$.ajax({
 			url: "http://api.sandbox.amadeus.com/v1.2/cars/search-circle?apikey=biyR76JCtDlFZsQ8hSFLnx4Ea4dEAYOt&radius=42&lang=EN&currency=USD&rate_class=ALL&rate_plan=DAILY",
