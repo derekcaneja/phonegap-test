@@ -30,11 +30,9 @@ Server.get = function(table, data, callback) {
 }
 
 Server.set = function(table, data, callback) {
-	var method = (!data.id) ? 'POST' : 'PUT';
-
 	$.ajax({
 		url  : Server.API + '/' + table,
-		type : method,
+		type : 'POST',
 		data : data,
 		success: function(data) {
 			callback(null, data);
