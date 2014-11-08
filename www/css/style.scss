@@ -155,7 +155,7 @@ footer{
 	left: 0;
 	z-index:2;
 	padding:10px;
-	background: $paleRed;
+	background: #7099a2;
 	text-align: center;
 	color: #fff;
 	*{
@@ -337,4 +337,24 @@ footer{
 	height: 30vw;
 	width: 90%;
 	@include border-radius(8px);
+}
+
+.add-ride{
+	position: absolute;
+	bottom: 50px;
+	right: 12px;
+	width: 63px;
+	height: 63px;
+	padding-top: 1px;
+	text-align: center;
+	display: table;
+	*{
+		display: table-cell !important;
+		height: 100%;
+		vertical-align: middle;
+	}
+	font-size: 24px;
+	color: #fff;
+	background: $paleRed;
+	@include border-radius(50%);
 }

@@ -30,7 +30,9 @@ var app = {
         this.sidebarIcon.on('tap', this.toggleSidebar);
         this.searchIcon.on('tap', this.toggleSearch);
         this.backIcon.on('tap', this.backToMain);
-
+        $('.post').each(function(){
+            this.indivPost = new Hammer($('.post')[0]);
+        })
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
@@ -39,7 +41,7 @@ var app = {
 
         $('.post').mouseup(function(ev){
             if($('sidebar').prop('open')){
-                    this.toggleSidebar();
+                    this.toggleSidebar;
                     return false;
                 }else{
                     $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
@@ -130,7 +132,6 @@ var app = {
     },
 
     toggleSidebar: function(ev){
-        console.log("TOGGLING")
         var isOpen       = $('sidebar').prop('open');
         var sidebarWidth = $('sidebar').width();
         
@@ -138,10 +139,8 @@ var app = {
 
         if(!isOpen){
             $('#main').velocity({ translateX: sidebarWidth, scale3d: [1,1,1], rotateZ: 0, translateZ: 0}, { duration: 350 }, { easing: 'easeOut'});
-            console.log("TOGGLING IF")
             $('sidebar').prop('open', true);
         } else {
-            console.log("TOGGLING ELSE")
             $('#main').velocity({ translateX: 0, scale3d: [1, 1, 1], rotateZ: 0,translateZ: 0}, { duration: 350 }, { easing: 'easeOut' })
             
             setTimeout(function(){
