@@ -141,11 +141,13 @@ sidebar {
       text-align: center;
       margin-right: 5px; }
 
-header .fa-bars, header .fa-search {
+header .fa-bars, header .fa-search, header .fa-times {
+  position: relative;
   height: 100%;
   text-align: center;
   padding-top: 4px;
-  font-size: 32px; }
+  font-size: 32px;
+  z-index: 111; }
 header .column:last-of-type {
   float: right; }
   header .column:last-of-type i {
@@ -493,13 +495,19 @@ footer {
 
 .logoicon {
   position: absolute;
-  top: 16px;
-  left: 38%;
+  top: 0;
+  padding-top: 18px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  z-index: -1;
   color: rgba(103, 65, 114, 0.2); }
   .logoicon i {
     display: inline-block;
     vertical-align: middle;
-    text-align: center; }
+    text-align: center;
+    z-index: 1; }
   .logoicon .fa-child {
     font-size: 24px !important;
     width: 19px !important; }
