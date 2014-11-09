@@ -20,7 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.currentUser = null;
-        
+
         this.bindEvents();
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
@@ -41,14 +41,35 @@ var app = {
              //        $('.app').attr('style', '');
              //    },250)
         }); 
-        
+
         $('#backToMain').mouseup(function(ev){
             $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
             setTimeout(function(){
                     $('.app').attr('style', '');
                 },300)
-        })
+        });
 
+        Server.get('ride', function(err, rides) {
+            Server.get('user', function(err, users) {
+                var userData = {};
+
+                for(var i = 0; i < users.length; i++) userData[users[i].id] = users[i];
+
+                var posts = [];
+
+                for(var i = 0; i < rides.length; i++) {
+                    posts.push({ user: userData[rides[i].userID], ride: rides[i] })
+                }
+
+                var source   = $('#post-results').html();
+                var template = Handlebars.compile(source);
+                var html     = template({ posts: posts });
+
+                console.log(posts)
+
+                $('.results').html(html);
+            });
+        });
     },
     // Bind Event Listeners
     //
@@ -66,12 +87,12 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        // var parentElement = document.getElementById(id);
+        // var listeningElement = parentElement.querySelector('.listening');
+        // var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        // listeningElement.setAttribute('style', 'display:none;');
+        // receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
     },
@@ -80,21 +101,38 @@ var app = {
         FB.api('/me?fields=first_name,last_name,education{type,school{name}},work{employer{name}},birthday,gender', function(response) {
             var user = response;
         
-            user.work      = response.work[0]['employer']['name'];
-            user.education = response.education[0]['school']['name'];
-          
-            console.log(user)
+            for(var i = 0; i < user.education.length; i++) {
+                if(user.education[i].type == 'College')user.education = user.education[i]['school']['name'];
+            }
+
+            user.work = (user.work && user.work[0]) ? response.work[0]['employer']['name'] : null;
           
             Server.post('user', user, function(err) {
                 if(err) console.log(err);
-                else    console.log('User created!');
+                else    {
+                    app.setUser(user.id);
+                    
+                    console.log('User created!');
+                }
             });
         });  
     },
 
-    authenticateUser: function(id) {
-        Server.get('user', { id: id }, function(err) {
+    setUser: function(id) {
+        var _this = this;
 
+        Server.get('user', { id: id }, function(err, user) {
+            if(err || !user) console.log('Could not log in!');
+
+            _this.currentUser = user;
+
+            $('.app').velocity({ opacity: 1 }, { 
+                duration : 500,
+                begin    : function() { $('.app').show()   },
+                complete : function() { $('.login').hide() }
+            });
+
+            console.log('User logged in: ' + user.id)
         });
     },
 
