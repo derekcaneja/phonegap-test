@@ -52,7 +52,8 @@ var app = {
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
-        $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
+        $('sidebar ul,.search').css('height', $(window).height() - $('.header').outerHeight());
+        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
 
         $('.input').focus(function(e){
