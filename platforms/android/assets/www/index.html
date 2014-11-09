@@ -19,11 +19,11 @@
             <sidebar open="false">
                 <div class="logo"><h1>RIDESUPPLY</h1></div>
                 <ul class="nav">
-                    <li data-page="explore"><a>Explore</a></li>
-                    <li data-page="my_rides"><a>My Rides</a></li>
-                    <li data-page="add_ride"><a>Add Ride</a></li>
-                    <li data-page="account_settings"><a>Account Settings</a></li>
-                    <li><a>Logout</a></li>
+                    <li data-page="add_ride" id="add-ride-sidebar"><a><i class="fa fa-plus"></i><span>Add Ride</span></a></li>
+                    <li data-page="explore"><a><i class="fa fa-home"></i><span>Explore</span></a></li>
+                    <li data-page="my_rides"><a><i class="fa fa-bookmark"></i><span>My Rides</span></a></li>
+                    <li data-page="account_settings"><a><i class="fa fa-cog"></i><span>Edit Profile</span></a></li>
+                    <li><a><i class="fa fa-power-off"></i><span>Logout</span></a></li>
                 </ul>
             </sidebar>
             <div id="main">
@@ -57,7 +57,9 @@
                     </div>
                 </div>
                 <div class="second-main">
-
+                    <div class="app-side-page">
+                    
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +68,7 @@
         <!-- App Pages -->
         <section class="login-page">
             <p>Please log in with facebook!</p>
-            <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();"></fb:login-button>
+            <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();" style="display:none"></fb:login-button>
         </section>
 
         <section class="explore-page" style="display:none">
@@ -154,6 +156,19 @@
         </section>
 
         <section class="account-settings-page" style="display:none">
+            <h2>Update your information</h2>
+            <div class="row">
+                <label class="inputlabel" for="origin">Picture</label>
+                <input class="input settings-picture" type="text" name="origin" placeholder="Origin" required>
+            </div>
+            <div class="row">
+                <label class="inputlabel" for="pickup_location">Bio</label>
+                <input class="input settings-bio" type="text" name="pickup_location" placeholder="140 Characters...">
+            </div>
+            <button class="update-settings">Update</button>
+        </section>
+
+        <section class="post-page" style="display:none">
             
         </section>
 
@@ -214,18 +229,15 @@
         <script type="text/javascript" src="js/vendor/floatlabel.js"></script>
         <script type="text/javascript" src="js/vendor/hammer.min.js"></script>
         <script type="text/javascript" src="js/vendor/fastclick.min.js"></script>
-<<<<<<< HEAD
         <script type="text/javascript" src="js/vendor/stripe.min.js"></script>
-=======
         <script type="text/javascript" src="js/vendor/chosen.jquery.min.js"></script>
->>>>>>> 79c2601911099106e1cb8461ed2cffeaefdf1c39
-
+        
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+        <script type="text/javascript" src="js/googleAutocomplete.js"></script>
+       
         <script type="text/javascript" src="js/helpers.js"></script>
         <script type="text/javascript" src="js/server.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-        <script type="text/javascript" src="js/googleAutocomplete.js"></script>
-        <script type="text/javascript" src="js/rideFn.js"></script>
 
         <script>
 

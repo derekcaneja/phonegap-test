@@ -6,15 +6,16 @@ var rideFn = {
 			$('#addRideForm').on('submit', function(e){
 				e.preventDefault();
 				rideFn.addRide({
-					userId: app.currentUser.id,
+					// userId: app.currentUser.id,
+					user_id: '10152985804163054',
 					origin: $('input[name="origin"]').val(),
 					destination: $('input[name="destination"]').val(),
-					seats_available: $('input[name="seats_available"]').val(),
+					seats_available: parseInt($('input[name="seats_available"]').val()),
 					pickup_location: $('input[name="pickup_location"]').val()
 				});
   		});
 
-  		$(".chosen-select").chosen({
+  		$(".chosen-select[name='car_year']").chosen({
 				width: "300px",
 				no_results_text: "Oops, nothing found!"
 			}); 
@@ -27,14 +28,12 @@ var rideFn = {
 
 	addRide: function(ride){
 		console.log(ride)
-		// Server.post('ride', ride, function(err,res){
-		// 	console.log('err',err)
-		// 	console.log('res',res)
-		// 	if (err){}
-		// 	else {calculateDistance(res)}
-		// })
-		// alert('you made it this far!')
-		// console.log('ride',$(ride).serialize())
+		Server.post('ride', ride, function(err,res){
+			console.log('err',err)
+			console.log('res',res)
+			if (err){}
+			else { rideFn.calculateDistance(res) }
+		})
 	},
 
 	calculateDistance: function(ride){
@@ -60,7 +59,7 @@ var rideFn = {
 			}) 
 
 			cost = calculateGasCost(miles, car_id)
-
+			console.log('cost', cost)
 			rideParams = {
 				id: ride.id,
 				cost: cost,
@@ -137,33 +136,63 @@ var rideFn = {
 	},
 
 	loadCarMakes: function(year){
-		var carMakes
+		var carMakes = []
+		var carMakeSelect = $('select[name="car_make"')
 		$.ajax({ 
-			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%22http%3A%2F%2Fwww.fueleconomy.gov%2Fws%2Frest%2Fvehicle%2Fmenu%2Fmake%3Fyear%3D'+year+'%22&diagnostics=true'
+			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%22http%3A%2F%2Fwww.fueleconomy.gov%2Fws%2Frest%2Fvehicle%2Fmenu%2Fmake%3Fyear%3D'+ year +'%22&format=json&diagnostics=true&callback='
 		})
 		.success(function(res){
-			console.log(rideFn.xmlToJson(res))
-			// options = []
-			// results = xmlToJson(res)["menuItems"]
-			// for(var i = 0; i < results.length; i++){
-			// 	carMakes = results[i]["menuItem"]["text"]
-			// }
+			results = res["query"]["results"]["menuItems"]["menuItem"]
+			for(var i = 0; i < results.length; i++){
+				carMakes.push(results[i]["text"])
+			}
+			$.each(carMakes, function(i) {   
+				opt = carMakes[i]
+	     	carMakeSelect
+		    .append($("<option></option>")
+		    .attr("value",opt)
+		    .text(opt)); 
+				});
+			carMakeSelect.chosen({
+				width: "300px",
+				no_results_text: "Oops, nothing found!"
+			});
 
-			// $.each(carMakes, function(opt) {   
-	  //    $('select[name="car_make"')
-	  //        .append($("<option></option>")
-	  //        .attr("value",opt)
-	  //        .text(opt)); 
-			// 	});
+			carMakeSelect.on('chosen:hiding_dropdown', function(){
+				rideFn.loadCarModels(year, encodeURIComponent($(this).val()));
+			}) 
 		})
-		.error(function(res){console.log('loadCarMakes u no work')})
+		.error(function(res){console.log('loadCarMakes u no workx')})
 	},
 
-	loadCarModels: function(){
-		var carModels
-		$.ajax({
-			url: '/ws/rest/vehicle/menu/make?year'
+	loadCarModels: function(year, make){
+		var carModels = []
+		var carModelSelect = $('select[name="car_models"')
+		console.log(year)
+		console.log(make)
+		$.ajax({ 
+			url: 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%27http%3A%2F%2Fwww.fueleconomy.gov%2Fws%2Frest%2Fvehicle%2Fmenu%2Fmodel%3Fyear%3D'+year+'%27&make%3D'+make+'&format=json&diagnostics=true'
 		})
+		.success(function(res){
+			results = res["query"]["results"]["menuItems"]
+			console.log(results)
+		// 	// ["results"]["menuItems"]["menuItem"]
+		// 	// for(var i = 0; i < results.length; i++){
+		// 	// 	carModels.push(results[i]["text"])
+		// 	// }
+		// 	// $.each(carModels, function(i) {   
+		// 	// 	opt = carModels[i]
+	 //  //    	carModelSelect
+		//  //    .append($("<option></option>")
+		//  //    .attr("value",opt)
+		//  //    .text(opt)); 
+		// 	// 	});
+		// 	// carModelSelect.chosen({
+		// 	// 	width: "300px",
+		// 	// 	no_results_text: "Oops, nothing found!"
+		// 	// });
+		})
+		.error(function(res){console.log('loadCarModelss u no work')})
 	},
 
 	// http://davidwalsh.name/convert-xml-json

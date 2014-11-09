@@ -80,14 +80,6 @@ var app = {
             $('label[for="'+$(this).attr('name')+'"]').toggleClass('label-active');
         });
 
-        $('#backToMain').mouseup(function(ev){
-            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
-            
-            setTimeout(function(){
-                    $('.app').attr('style', '');
-            }, 300)
-        });
-
         Server.get('ride', function(err, rides) {
             Server.get('user', function(err, users) {
                 var userData = {};
@@ -119,8 +111,6 @@ var app = {
 
         document.addEventListener('deviceready', this.onDeviceReady, false);
 
-        console.log('TEST')
-
         this.sidebarIcon.on('tap', this.toggleSidebar);
         this.searchIcon.on('tap', this.toggleSearch);
         this.backIcon.on('tap', this.backToMain);
@@ -146,6 +136,14 @@ var app = {
 
         $('.add-ride').mouseup(function() {
             _this.toggleSidePage();
+        });
+
+        $('#backToMain').mouseup(function(ev){
+            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
+            setTimeout(function(){
+                    $('.app').attr('style', '');
+            }, 300)
         });
     },
     // deviceready Event Handler
@@ -174,6 +172,10 @@ var app = {
         if($('sidebar').prop('open')) app.toggleSidebar();
 
         $('.app-page').html(app.pages[page].html());
+
+        $('.update-settings').mouseup(function() {
+            app.updateSettings();
+        });
     },
 
     setSidePage: function(page) {
@@ -299,6 +301,15 @@ var app = {
         setTimeout(function(){
                 $('.app').attr('style', '');
             },300)
+    },
+
+    updateSettings: function() {
+        var pic = $('.settings-picture').val() || 'test';
+        var bio = $('.settings-bio').val();
+
+        Server.put('user', { id: app.currentUser.id, profile_picture: pic, bio: bio }, function(err) {
+            if(err) console.log(err);
+        });
     }
 };
 

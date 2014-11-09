@@ -23,6 +23,37 @@ var rideFn = {
 			$(".chosen-select[name='car_year']").on('chosen:hiding_dropdown', function(){
 				rideFn.loadCarMakes($(this).val());
 			})
+
+			$('input#searchbox').on('keypress', function(e){
+				if( e.which == 13 ){ rideFn.findRide(this.value); }
+			})
+		});
+	},
+
+	findRide: function(origin){
+    Server.get('ride', {origin: origin}, function(err, rides) {
+      Server.get('user', function(err, users) {
+        var userData = {};
+
+        for(var i = 0; i < users.length; i++) userData[users[i].id] = users[i];
+
+        var posts = [];
+
+        for(var i = 0; i < rides.length; i++) {
+            posts.push({ user: userData[rides[i].user_id], ride: rides[i] })
+        }
+
+        var source   = $('#post-results').html();
+        var template = Handlebars.compile(source);
+        var html     = template({ posts: posts });
+
+        $('.search-results').html(html);
+
+				$('.post').mouseup(function(ev){
+				    if($('sidebar').prop('open')){  _this.toggleSidebar();}
+				    else{ $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});}
+				}); 
+			});
 		});
 	},
 
