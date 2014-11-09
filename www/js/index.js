@@ -55,13 +55,6 @@ var app = {
         $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
 
-        $('.post').mouseup(function(ev){
-            if($('sidebar').prop('open')){
-                    _this.toggleSidebar();
-                }else{
-                    $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
-                }
-        }); 
 
         $('#backToMain').mouseup(function(ev){
             $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
@@ -87,6 +80,14 @@ var app = {
                 var html     = template({ posts: posts });
 
                 $('.results').html(html);
+                
+        $('.post').mouseup(function(ev){
+            if($('sidebar').prop('open')){
+                    _this.toggleSidebar();
+                }else{
+                    $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+                }
+        }); 
             });
         });
     },
