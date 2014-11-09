@@ -141,7 +141,7 @@ sidebar {
       text-align: center;
       margin-right: 5px; }
 
-header .fa-bars, header .fa-search {
+header .fa-bars, header .fa-search, header .fa-times {
   height: 100%;
   text-align: center;
   padding-top: 4px;
@@ -494,7 +494,9 @@ footer {
 .logoicon {
   position: absolute;
   top: 16px;
-  left: 38%;
+  width: 100%;
+  text-align: center;
+  height: 100%;
   color: rgba(103, 65, 114, 0.2); }
   .logoicon i {
     display: inline-block;

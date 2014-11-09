@@ -72,7 +72,8 @@ var app = {
 
         $('header i.fa-bars, header i.fa-search').css('width', $('header').height());
         $('sidebar ul,.search').css('height', $(window).height() - $('.header').outerHeight());
-        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
+        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight());
+        //$('.logoicon').css('margin-left', $('.logoicon').width()/-2)
         $('.driver-image').css('height', $('.driver-image').width());
 
         $('.input').focus(function(e){

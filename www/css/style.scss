@@ -145,7 +145,7 @@ sidebar{
 }
 header{
 	@extend .header;
-	.fa-bars,.fa-search{
+	.fa-bars,.fa-search,.fa-times{
 		height: 100%;
 		text-align: center;
 		padding-top: 4px;
@@ -558,7 +558,10 @@ footer{
 .logoicon{
 	position: absolute;
 	top: 16px;
-	left: 38%;
+	width: 100%;
+	text-align: center;
+	height: 100%;  
+	//left: 50vw;
 	color: rgba($mainGreenGray, 0.2);
 	i{
 		display: inline-block;
@@ -578,4 +581,7 @@ footer{
 		font-size: 24px;
 		width: 24px;
 	}
+	// &:last-of-type{
+	// 	left: 150vw;
+	// }
 }
