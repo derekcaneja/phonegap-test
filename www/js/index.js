@@ -60,6 +60,7 @@ var app = {
             my_rides         : $('.my-rides-page'),
             add_ride         : $('.add-ride-page'),
             account_settings : $('.account-settings-page'),
+            payment_settings : $('.payment-settings-page'),
             post             : $('.post-page')
         }
 

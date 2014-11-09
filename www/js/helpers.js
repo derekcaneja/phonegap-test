@@ -10,6 +10,29 @@ Handlebars.registerHelper('post', function(user, ride) {
     return new Handlebars.SafeString(template(context));
 });
 
+Handlebars.registerHelper('ride', function(ride) {
+    var context  = { 
+        ride: ride 
+    };
+
+    var source   = $("#ride-template").html();
+    var template = Handlebars.compile(source);
+
+    return new Handlebars.SafeString(template(context));
+});
+
+Handlebars.registerHelper('confirm_ride', function(user, ride) {
+    var context  = { 
+        user: user, 
+        ride: ride 
+    };
+
+    var source   = $("#confirm-ride-template").html();
+    var template = Handlebars.compile(source);
+
+    return new Handlebars.SafeString(template(context));
+});
+
 Handlebars.registerHelper('substring', function(string, start, length) {
     console.log(string)
     return new Handlebars.SafeString(string.substring(start, length));

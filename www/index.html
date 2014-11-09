@@ -172,6 +172,19 @@
             <button class="update-settings">Update</button>
         </section>
 
+        <section class="payment-settings-page" style="display:none">
+            <h2>Update your payment information</h2>
+            <div class="row">
+                <label class="inputlabel" for="origin">Picture</label>
+                <input class="input settings-picture" type="text" name="origin" placeholder="Origin" required>
+            </div>
+            <div class="row">
+                <label class="inputlabel" for="pickup_location">Bio</label>
+                <input class="input settings-bio" type="text" name="pickup_location" placeholder="140 Characters...">
+            </div>
+            <button class="update-settings">Update</button>
+        </section>
+
         <section class="post-page" style="display:none">
             
         </section>
@@ -223,6 +236,14 @@
             </section>
         </script>
 
+        <script id="ride-template" type="text/x-handlebars-template">
+            
+        </script>
+
+        <script id="confirm-ride-template" type="text/x-handlebars-template">
+            
+        </script>
+
         <!-- Javascript Includes -->
 
         <script type="text/javascript" src="cordova.js"></script>
@@ -235,7 +256,8 @@
         <script type="text/javascript" src="js/vendor/fastclick.min.js"></script>
         <script type="text/javascript" src="js/vendor/stripe.min.js"></script>
         <script type="text/javascript" src="js/vendor/chosen.jquery.min.js"></script>
-        
+        <script type="text/javascript" src="js/vendor/memory-store.js"></script>
+
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
         <script type="text/javascript" src="js/googleAutocomplete.js"></script>
        
