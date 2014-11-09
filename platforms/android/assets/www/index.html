@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="//use.typekit.net/kgh2tpx.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <title>RideSupply</title>
+    </head>
+    <body>
+        <div class="app">
+            <sidebar open="false">
+                <div class="logo"><h1>RIDESUPPLY</h1></div>
+                <ul class="nav">
+                    <li data-page="explore"><a>Explore</a></li>
+                    <li data-page="my_rides"><a>My Rides</a></li>
+                    <li data-page="add_ride"><a>Add Ride</a></li>
+                    <li data-page="account_settings"><a>Account Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </sidebar>
+            <div id="main">
+                <header class="row header">
+                    <div class="column">
+                        <i id="openSidebar" class="fa fa-bars"></i>
+                    </div>
+                     <div class="column">
+                        <i id="openSearch" class="fa fa-search"></i>
+                    </div>
+                </header>
+
+                <div class="app-page">
+                    
+                </div>
+
+                <section class="search">
+                    <div class="row">
+                        <input type="text" placeholder="Where to?">
+                    </div>
+                </section>
+                <footer class="row footer">
+                    <h3>Filter</h3>
+                </footer>
+                <div class="add-ride"><i class="fa fa-plus"></i></div>
+            </div>
+            <div class="second">
+                <div class="header">
+                    <div class="column">
+                        <i id="backToMain" class="fa fa-arrow-left"></i>
+                    </div>
+                </div>
+                <div class="second-main">
+                    <form id="addRideForm" novalidate>
+                        <label for="origin">Origin</label>
+                        <input name="origin" placeholder="" required>
+                        <br>
+                        <label for="destination">Destination</label>
+                        <input name="destination" placeholder="" required>
+                        <br>
+                        <label for="seats_available">Available Seats</label>
+                        <input type="number" min="1" name="seats_available" required>
+                        <br>
+                        <label for="pickup_location">Pick up Location</label>
+                        <input name="pickup_location" placeholder="">
+                        <br>
+                        <input type="submit" value="Add Ride">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- App Pages -->
+        <section class="login">
+            <p>Please log in with facebook!</p>
+            <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();"></fb:login-button>
+        </section>
+
+        <section class="explore" style="display:none">
+            <div class="results">
+                <script id="my-rides-results" type="text/x-handlebars-template">
+                    {{#each posts}}
+                        <div class="post">{{post user ride}}</div>
+                    {{/each}}
+                </script>
+            </div>
+        </section>
+
+        <section class="my-rides" style="display:none">
+            <script id="post-results" type="text/x-handlebars-template">
+                {{#each posts}}
+                    <div class="post">{{post user ride}}</div>
+                {{/each}}
+            </script>
+        </section>
+
+        <section class="add-ride" style="display:none">
+            
+        </section>
+
+        <section class="account-settings" style="display:none">
+            
+        </section>
+
+
+        <!-- Handlebars Templates -->
+
+        <script id="post-template" type="text/x-handlebars-template">
+            <div class="floating-date">
+                <span>{{ride.date}}</span>
+            </div>
+            <section class="top row">
+                <div class="column">
+                    <div class="location">
+                        <div class="row">
+                            <h4>{{ride.origin}}</h4>
+                            <i class="fa fa-level-down"></i>
+                            <h1>{{ride.destination}}</h1>
+                        </div>
+                        <div class="row time-estimate">
+                            <i class="fa fa-clock-o"></i>
+                            <h6>Est. {{ride.length}} hour ride</h6>
+                        </div>
+                    </div>
+                    <div class="price column">
+                        <div class="row">
+                            <div>
+                                <i class="fa fa-dollar"></i><h1>{{ride.cost}}</h1>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="column seat-availability">
+                        <div class="row">
+                            <div>
+                                <h3>{{ride.seats_available}}</h3>
+                                <h5>Seats</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="column">
+                    <div class="driver-info">
+                        <div class="driver-image"></div>
+                        <h4>{{user.first_name}} {{substring user.last_name 0 1}}.</h4>
+                        <h6>{{capitalize user.gender 0 1}}, {{age user.birthday}}</h6>
+                    </div>
+                </div>
+            </section>
+        </script>
+
+        <!-- Javascript Includes -->
+
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="js/vendor/velocity.min.js"></script>
+        <script type="text/javascript" src="js/vendor/handlebars.min.js"></script>
+        <script type="text/javascript" src="js/vendor/hammer.min.js"></script>
+        <script type="text/javascript" src="js/vendor/fastclick.min.js"></script>
+        <script type="text/javascript" src="js/vendor/stripe.min.js"></script>
+
+        <script type="text/javascript" src="js/helpers.js"></script>
+        <script type="text/javascript" src="js/server.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+
+        <script>
+
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '320604994809057',
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : 'v2.2'
+                });
+
+                FB.getLoginStatus(function(response) {
+                    if(response.status === 'connected') {
+                        
+                        console.log('User already connected!');
+                        console.log(response)
+
+                        app.setUser(response.authResponse.userID);
+                    }
+                });
+            };
+            
+            // Load the Facebook SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "http://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+        </script>
+    </body>
+</html>

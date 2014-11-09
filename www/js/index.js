@@ -16,6 +16,36 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+// var test_key = 'sk_test_l3E5wNlS79TbLhsYbgwsq5uS';
+// var test_pub = 'pk_test_Ep8sKQVZStEonPwes0Ven65h';
+
+// Stripe.setPublishableKey(test_pub);
+
+// Stripe.card.createToken({
+//   number    : $('.card-number').val(),
+//   cvc       : $('.card-cvc').val(),
+//   exp_month : $('.card-expiry-month').val(),
+//   exp_year  : $('.card-expiry-year').val()
+// }, stripeResponseHandler);
+
+function stripeResponseHandler(status, response) {
+  var $form = $('#payment-form');
+
+  if (response.error) {
+    // Show the errors on the form
+    $form.find('.payment-errors').text(response.error.message);
+    $form.find('button').prop('disabled', false);
+  } else {
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+    // and submit
+    $form.get(0).submit();
+  }
+}
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -24,51 +54,21 @@ var app = {
         this.currentUser = null;
 
         this.pages = {
-            explore          : $('.explore'),
-            my_rides         : $('.my-rides'),
-            add_ride         : $('.add-ride'),
-            account_settings : $('.account-settings')
+            explore          : $('.explore-page'),
+            my_rides         : $('.my-rides-page'),
+            add_ride         : $('.add-ride-page'),
+            account_settings : $('.account-settings-page')
         }
 
         this.setPage('explore');
-
-        this.bindEvents();
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
         this.searchIcon  = new Hammer($('#openSearch')[0]);
         this.backIcon    = new Hammer($('#backToMain')[0]);
 
-        this.sidebarIcon.on('tap', this.toggleSidebar);
-        this.searchIcon.on('tap', this.toggleSearch);
-        this.backIcon.on('tap', this.backToMain);
-        // $('.post').each(function(){
-        //     this.indivPost = new Hammer($('.post')[0]);
-        // })
-
-        $('.nav li').mouseup(function() {
-            _this.setPage($(this).data('page'));
-        });
-
-        $('.profile-select').on('click', this.setProfilePicture);
-
         $('header i').css('width', $('header').height());
         $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
-
-        $('.post').mouseup(function(ev){
-            if($('sidebar').prop('open')){
-                    _this.toggleSidebar();
-                }else{
-                    $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
-                }
-        }); 
-
-        $('#backToMain').mouseup(function(ev){
-            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
-            setTimeout(function(){
-                    $('.app').attr('style', '');
-                },300)
-        });
 
         Server.get('ride', function(err, rides) {
             Server.get('user', function(err, users) {
@@ -87,6 +87,8 @@ var app = {
                 var html     = template({ posts: posts });
 
                 $('.results').html(html);
+
+                _this.bindEvents(); 
             });
         });
     },
@@ -95,7 +97,32 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+        var _this = this;
+
         document.addEventListener('deviceready', this.onDeviceReady, false);
+
+        this.sidebarIcon.on('tap', this.toggleSidebar);
+        this.searchIcon.on('tap', this.toggleSearch);
+        this.backIcon.on('tap', this.backToMain);
+
+        $('.nav li').mouseup(function() {
+            if($(this).data('page')) _this.setPage($(this).data('page'));
+        });
+
+        $('.profile-select').on('click', this.setProfilePicture);
+
+        $('.post').mouseup(function(ev){
+            if($('sidebar').prop('open')) _this.toggleSidebar();
+            else $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+        });
+
+        $('#backToMain').mouseup(function(ev){
+            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
+            setTimeout(function(){
+                $('.app').attr('style', '');
+            },300)
+        });
     },
     // deviceready Event Handler
     //
@@ -103,6 +130,8 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+        window.plugins.GCM.register(274273707076, 'GCM_Event', GCM_Success, GCM_Fail);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -117,7 +146,7 @@ var app = {
     },
 
     setPage: function(page) {
-        $('.app-page').html(this.pages[page].html());
+        $('.app-page').html(app.pages[page].html());
     },
 
     createUser: function() {
@@ -227,5 +256,41 @@ var app = {
             },300)
     }
 };
+
+function GCM_Event(e) {
+    console.log(e)
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    console.log("Regid " + e.regid);
+                    alert('registration id = '+e.regid);
+                }
+            break;
+ 
+            case 'message':
+              // this is the actual push notification. its format depends on the data model from the push server
+              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+            break;
+ 
+            case 'error':
+              alert('GCM error = '+e.msg);
+            break;
+ 
+            default:
+              alert('An unknown GCM event has occurred');
+              break;
+        }
+    }
+
+function GCM_Success(e) {
+    console.log(e)
+}
+
+function GCM_Fail(e) {
+    console.log('error ' + e)
+}
+
 
 app.initialize();

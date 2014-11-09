@@ -15,7 +15,7 @@
         <title>RideSupply</title>
     </head>
     <body>
-        <div class="app" style="display:none;opacity:0">
+        <div class="app">
             <sidebar open="false">
                 <div class="logo"><h1>RIDESUPPLY</h1></div>
                 <ul class="nav">
@@ -57,33 +57,19 @@
                     </div>
                 </div>
                 <div class="second-main">
-                    <form id="addRideForm" novalidate>
-                        <label for="origin">Origin</label>
-                        <input name="origin" placeholder="" required>
-                        <br>
-                        <label for="destination">Destination</label>
-                        <input name="destination" placeholder="" required>
-                        <br>
-                        <label for="seats_available">Available Seats</label>
-                        <input type="number" min="1" name="seats_available" required>
-                        <br>
-                        <label for="pickup_location">Pick up Location</label>
-                        <input name="pickup_location" placeholder="">
-                        <br>
-                        <input type="submit" value="Add Ride">
-                    </form>
+                    
                 </div>
             </div>
 
         </div>
 
         <!-- App Pages -->
-        <section class="login">
+        <section class="login-page">
             <p>Please log in with facebook!</p>
             <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();"></fb:login-button>
         </section>
 
-        <section class="explore" style="display:none">
+        <section class="explore-page" style="display:none">
             <div class="results">
                 <script id="my-rides-results" type="text/x-handlebars-template">
                     {{#each posts}}
@@ -93,7 +79,7 @@
             </div>
         </section>
 
-        <section class="my-rides" style="display:none">
+        <section class="my-rides-page" style="display:none">
             <script id="post-results" type="text/x-handlebars-template">
                 {{#each posts}}
                     <div class="post">{{post user ride}}</div>
@@ -101,11 +87,25 @@
             </script>
         </section>
 
-        <section class="add-ride" style="display:none">
-            
+        <section class="add-ride-page" style="display:none">
+            <form id="addRideForm" novalidate>
+                <label for="origin">Origin</label>
+                <input name="origin" placeholder="" required>
+                <br>
+                <label for="destination">Destination</label>
+                <input name="destination" placeholder="" required>
+                <br>
+                <label for="seats_available">Available Seats</label>
+                <input type="number" min="1" name="seats_available" required>
+                <br>
+                <label for="pickup_location">Pick up Location</label>
+                <input name="pickup_location" placeholder="">
+                <br>
+                <input type="submit" value="Add Ride">
+            </form>
         </section>
 
-        <section class="account-settings" style="display:none">
+        <section class="account-settings-page" style="display:none">
             
         </section>
 
@@ -165,6 +165,7 @@
         <script type="text/javascript" src="js/vendor/handlebars.min.js"></script>
         <script type="text/javascript" src="js/vendor/hammer.min.js"></script>
         <script type="text/javascript" src="js/vendor/fastclick.min.js"></script>
+        <script type="text/javascript" src="js/vendor/stripe.min.js"></script>
 
         <script type="text/javascript" src="js/helpers.js"></script>
         <script type="text/javascript" src="js/server.js"></script>
