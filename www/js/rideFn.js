@@ -2,29 +2,39 @@ var rideFn = {
 
 	init: function(){
 		$(document).ready( function(){
+
 			$('#addRideForm').on('submit', function(e){
 				e.preventDefault();
-				rideFn.addRide(this)
+				rideFn.addRide({
+					userId: app.currentUser.id,
+					origin: $('input[name="origin"]').val(),
+					destination: $('input[name="destination"]').val(),
+					seats_available: $('input[name="seats_available"]').val(),
+					pickup_location: $('input[name="pickup_location"]').val()
+				});
+  		});
 
-				{
-					userId: App.currentUser
-					origin: ,
-					destination: ,
-					seats_available: ,
-					pickup_location: 
-				}
-  		})
-		})
+  		$(".chosen-select").chosen({
+				width: "300px",
+				no_results_text: "Oops, nothing found!"
+			}); 
+
+			$(".chosen-select[name='car_year']").on('chosen:hiding_dropdown', function(){
+				rideFn.loadCarMakes($(this).val());
+			})
+		});
 	},
 
 	addRide: function(ride){
-		Server.post('ride', ride, function(err,res){
-			console.log(err)
-			if (err){}
-			else {calculateDistance(res)}
-		})
-		alert('you made it this far!')
-		console.log('ride',$(ride).serialize())
+		console.log(ride)
+		// Server.post('ride', ride, function(err,res){
+		// 	console.log('err',err)
+		// 	console.log('res',res)
+		// 	if (err){}
+		// 	else {calculateDistance(res)}
+		// })
+		// alert('you made it this far!')
+		// console.log('ride',$(ride).serialize())
 	},
 
 	calculateDistance: function(ride){
@@ -39,9 +49,17 @@ var rideFn = {
 			origin_lat = res["routes"]["legs"]["start_location"]["lat"]
 			origin_lng = res["routes"]["legs"]["start_location"]["lng"]
 
-			ride.car = {id: 26}
+			var car_id 
+			Server.get('user', app.currentUser.id, function(err,res){
+				console.log('res', res)
+      	console.log('err', err)
+      	if(err){}
+      	else{
+      		car_id = res.car_id
+      	}
+			}) 
 
-			cost = calculateGasCost(miles, ride.car.id)
+			cost = calculateGasCost(miles, car_id)
 
 			rideParams = {
 				id: ride.id,
@@ -50,7 +68,7 @@ var rideFn = {
 				origin_lat: origin_lat,
 				origin_lng: origin_lng
 			}
-
+			console.log(rideParams)
 			updateRide(rideParams)
 		})
 		.error( function(){
@@ -116,6 +134,36 @@ var rideFn = {
 			return savings
 		})
 		.error( function() { console.log('calculate savings y u no work')})
+	},
+
+	loadCarMakes: function(year){
+		var carMakes
+		$.ajax({ 
+			url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D%22http%3A%2F%2Fwww.fueleconomy.gov%2Fws%2Frest%2Fvehicle%2Fmenu%2Fmake%3Fyear%3D'+year+'%22&diagnostics=true'
+		})
+		.success(function(res){
+			console.log(rideFn.xmlToJson(res))
+			// options = []
+			// results = xmlToJson(res)["menuItems"]
+			// for(var i = 0; i < results.length; i++){
+			// 	carMakes = results[i]["menuItem"]["text"]
+			// }
+
+			// $.each(carMakes, function(opt) {   
+	  //    $('select[name="car_make"')
+	  //        .append($("<option></option>")
+	  //        .attr("value",opt)
+	  //        .text(opt)); 
+			// 	});
+		})
+		.error(function(res){console.log('loadCarMakes u no work')})
+	},
+
+	loadCarModels: function(){
+		var carModels
+		$.ajax({
+			url: '/ws/rest/vehicle/menu/make?year'
+		})
 	},
 
 	// http://davidwalsh.name/convert-xml-json
