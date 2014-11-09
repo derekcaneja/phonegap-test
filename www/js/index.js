@@ -20,13 +20,23 @@ var app = {
     // Application Constructor
     initialize: function() {
         var _this = this;
+
         this.currentUser = null;
+
+        this.pages = {
+            explore          : $('.explore'),
+            my_rides         : $('.my-rides'),
+            add_ride         : $('.add-ride'),
+            account_settings : $('.account-settings')
+        }
+
+        this.setPage('explore');
 
         this.bindEvents();
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
         this.searchIcon  = new Hammer($('#openSearch')[0]);
-        this.backIcon  = new Hammer($('#backToMain')[0]);
+        this.backIcon    = new Hammer($('#backToMain')[0]);
 
         this.sidebarIcon.on('tap', this.toggleSidebar);
         this.searchIcon.on('tap', this.toggleSearch);
@@ -34,6 +44,11 @@ var app = {
         // $('.post').each(function(){
         //     this.indivPost = new Hammer($('.post')[0]);
         // })
+
+        $('.nav li').mouseup(function() {
+            _this.setPage($(this).data('page'));
+        });
+
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
@@ -64,13 +79,13 @@ var app = {
                 var posts = [];
 
                 for(var i = 0; i < rides.length; i++) {
-                    posts.push({ user: userData[rides[i].userID], ride: rides[i] })
+                    posts.push({ user: userData[rides[i].user_id], ride: rides[i] })
                 }
 
                 var source   = $('#post-results').html();
                 var template = Handlebars.compile(source);
                 var html     = template({ posts: posts });
-                console.log(posts)
+
                 $('.results').html(html);
             });
         });
@@ -99,6 +114,10 @@ var app = {
         // receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+
+    setPage: function(page) {
+        $('.app-page').html(this.pages[page].html());
     },
 
     createUser: function() {

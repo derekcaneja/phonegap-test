@@ -12,23 +12,17 @@
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//use.typekit.net/kgh2tpx.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
-        <script src="js/rideFn.js"></script>
         <title>RideSupply</title>
     </head>
     <body>
-        <div class="login">
-            <p>Please log in with facebook!</p>
-            <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();"></fb:login-button>
-        </div>
-
         <div class="app" style="display:none;opacity:0">
             <sidebar open="false">
                 <div class="logo"><h1>RIDESUPPLY</h1></div>
-                <ul>
-                    <li><a>Explore</a></li>
-                    <li><a>My Rides</a></li>
-                    <li><a href="add_ride">Add Ride</a></li>
-                    <li><a>Account Settings</a></li>
+                <ul class="nav">
+                    <li data-page="explore"><a>Explore</a></li>
+                    <li data-page="my_rides"><a>My Rides</a></li>
+                    <li data-page="add_ride"><a>Add Ride</a></li>
+                    <li data-page="account_settings"><a>Account Settings</a></li>
                     <li><a>Logout</a></li>
                 </ul>
             </sidebar>
@@ -41,13 +35,11 @@
                         <i id="openSearch" class="fa fa-search"></i>
                     </div>
                 </header>
-                <section class="results">
-                    <script id="post-results" type="text/x-handlebars-template">
-                        {{#each posts}}
-                            <div class="post">{{post user ride}}</div>
-                        {{/each}}
-                    </script>
-                </section>
+
+                <div class="app-page">
+                    
+                </div>
+
                 <section class="search">
                     <div class="row">
                         <input type="text" placeholder="Where to?">
@@ -69,6 +61,36 @@
         </div>
 
         <!-- App Pages -->
+        <section class="login">
+            <p>Please log in with facebook!</p>
+            <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();"></fb:login-button>
+        </section>
+
+        <section class="explore" style="display:none">
+            <div class="results">
+                <script id="my-rides-results" type="text/x-handlebars-template">
+                    {{#each posts}}
+                        <div class="post">{{post user ride}}</div>
+                    {{/each}}
+                </script>
+            </div>
+        </section>
+
+        <section class="my-rides" style="display:none">
+            <script id="post-results" type="text/x-handlebars-template">
+                {{#each posts}}
+                    <div class="post">{{post user ride}}</div>
+                {{/each}}
+            </script>
+        </section>
+
+        <section class="add-ride" style="display:none">
+            
+        </section>
+
+        <section class="account-settings" style="display:none">
+            
+        </section>
 
 
         <!-- Handlebars Templates -->
