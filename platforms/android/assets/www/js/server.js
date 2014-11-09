@@ -1,6 +1,6 @@
 var Server = {};
 
-Server.API = 'http://localhost:5555/api';
+Server.API = 'http://localhost:5555/api' //http://ride-supply-server.herokuapp.com/api';
 
 Server.get = function(table, data, callback) {
 	if(arguments.length == 3) {

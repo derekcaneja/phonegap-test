@@ -53,31 +53,30 @@ var app = {
 
         this.currentUser = null;
 
+        this.sidePageOpen = false;
+
         this.pages = {
             explore          : $('.explore-page'),
             my_rides         : $('.my-rides-page'),
             add_ride         : $('.add-ride-page'),
-            account_settings : $('.account-settings-page')
+            account_settings : $('.account-settings-page'),
+            post             : $('.post-page')
         }
 
         this.setPage('explore');
+        this.setSidePage('add_ride');
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
         this.searchIcon  = new Hammer($('#openSearch')[0]);
         this.backIcon    = new Hammer($('#backToMain')[0]);
 
         $('header i').css('width', $('header').height());
-        $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
+        $('sidebar ul,.search').css('height', $(window).height() - $('.header').outerHeight());
+        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
 
         $('.input').focus(function(e){
             $('label[for="'+$(this).attr('name')+'"]').toggleClass('label-active');
-        })
-        $('#backToMain').mouseup(function(ev){
-            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
-            setTimeout(function(){
-                    $('.app').attr('style', '');
-                },300)
         });
 
         Server.get('ride', function(err, rides) {
@@ -133,6 +132,18 @@ var app = {
                 $('.app').attr('style', '');
             },300)
         });
+
+        $('.add-ride').mouseup(function() {
+            _this.toggleSidePage();
+        });
+
+        $('#backToMain').mouseup(function(ev){
+            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
+            setTimeout(function(){
+                    $('.app').attr('style', '');
+            }, 300)
+        });
     },
     // deviceready Event Handler
     //
@@ -140,8 +151,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-
-        window.plugins.GCM.register(274273707076, 'GCM_Event', GCM_Success, GCM_Fail);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -156,7 +165,20 @@ var app = {
     },
 
     setPage: function(page) {
+        if(page != 'explore') $('.add-ride').hide();
+        else                  $('.add-ride').show();
+
+        if($('sidebar').prop('open')) app.toggleSidebar();
+
         $('.app-page').html(app.pages[page].html());
+
+        $('.update-settings').mouseup(function() {
+            app.updateSettings();
+        });
+    },
+
+    setSidePage: function(page) {
+        $('.app-side-page').html(app.pages[page].html());
     },
 
     createUser: function() {
@@ -252,6 +274,20 @@ var app = {
         }
     },
 
+    toggleSidePage: function() {
+        if(this.sidePageOpen) {
+            $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
+            setTimeout(function(){
+                $('.app').attr('style', '');
+            },300)
+        } else {
+            $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+        }
+
+        this.sidePageOpen = !this.sidePageOpen;
+    },
+
     toggleSearch: function(e) {
         $('body').toggleClass('search-active');
         $('.search').toggleClass('search-active');
@@ -263,45 +299,17 @@ var app = {
         $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
         setTimeout(function(){
                 $('.app').attr('style', '');
-
             },300)
+    },
+
+    updateSettings: function() {
+        var pic = $('.settings-picture').val() || 'test';
+        var bio = $('.settings-bio').val();
+
+        Server.put('user', { id: app.currentUser.id, profile_picture: pic, bio: bio }, function(err) {
+            if(err) console.log(err);
+        });
     }
 };
-
-function GCM_Event(e) {
-    console.log(e)
-        switch( e.event )
-        {
-            case 'registered':
-                if ( e.regid.length > 0 )
-                {
-                    console.log("Regid " + e.regid);
-                    alert('registration id = '+e.regid);
-                }
-            break;
- 
-            case 'message':
-              // this is the actual push notification. its format depends on the data model from the push server
-              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
-            break;
- 
-            case 'error':
-              alert('GCM error = '+e.msg);
-            break;
- 
-            default:
-              alert('An unknown GCM event has occurred');
-              break;
-        }
-    }
-
-function GCM_Success(e) {
-    console.log(e)
-}
-
-function GCM_Fail(e) {
-    console.log('error ' + e)
-}
-
 
 app.initialize();
