@@ -1,5 +1,32 @@
 var rideFn = {
 
+	init: function(){
+		$(document).ready( function(){
+			$('#addRideForm').on('submit', function(e){
+				e.preventDefault();
+				rideFn.addRide(this)
+
+				{
+					user_id: App.currentUser
+					origin: ,
+					destination: ,
+					available_seats: ,
+					pick_up_location: 
+				}
+  		})
+		})
+	},
+
+	addRide: function(ride){
+		Server.post('ride', ride, function(err,res){
+			console.log(err)
+			if (err){}
+			else {calculateDistance(res)}
+		})
+		alert('you made it this far!')
+		console.log('ride',$(ride).serialize())
+	},
+
 	calculateDistance: function(ride){
 		$.ajax({
 			url: "https://maps.googleapis.com/maps/api/directions/json?key=AIzaSyAlqhvAcLGSUiGi0XMvNI36DdZzpfN78Xs",
@@ -79,7 +106,12 @@ var rideFn = {
 			}
 		})
 		.success( function(res){
-			savings = res["results"]["cars"]["estimated_total"]["amount"]
+			if( res["results"]["cars"]["estimated_total"]["amount"]){
+				savings = res["results"]["cars"]["estimated_total"]["amount"]
+			}
+			else {
+				savings = "There were no available cars for you anyway!"
+			}
 			console.log(savings)
 			return savings
 		})
@@ -127,4 +159,5 @@ var rideFn = {
 
 }
 
+rideFn.init();
 
