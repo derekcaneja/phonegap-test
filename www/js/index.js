@@ -70,7 +70,7 @@ var app = {
         this.searchIcon  = new Hammer($('#openSearch')[0]);
         this.backIcon    = new Hammer($('#backToMain')[0]);
 
-        $('header i').css('width', $('header').height());
+        $('header i.fa-bars, header i.fa-search').css('width', $('header').height());
         $('sidebar ul,.search').css('height', $(window).height() - $('.header').outerHeight());
         $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());

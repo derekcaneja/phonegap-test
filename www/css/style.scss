@@ -106,7 +106,7 @@ sidebar{
 	height: 100%;
 	z-index: 1;
 	ul{
-		padding: 50px 12px;
+		padding: 50px 12px 0 0;
 		background-color: rgba(#fff,0.2);
 	}
 	li{
@@ -137,13 +137,15 @@ sidebar{
 			}
 		}
 		i{
+			width: 32px;
+			text-align: center;
 			margin-right: 5px;
 		}
 	}
 }
 header{
 	@extend .header;
-	i{
+	.fa-bars,.fa-search{
 		height: 100%;
 		text-align: center;
 		padding-top: 4px;
@@ -221,14 +223,34 @@ footer{
 	width: 100%;
 	height: $headerHeight;
 	text-align: left;
-	padding:14px;
+	padding:12px;
 	display: table;
+	color: #fff;
+	i{
+		display: table-cell;
+		vertical-align: middle;
+		height: 100%;
+		text-align: center;
+	}
+	.fa-child{
+		font-size: 24px;
+		width:19px;
+	}
+	.fa-plus{
+		font-size: 12px;
+		margin: 0 6px;
+		width: 20px;
+	}
+	.fa-car{
+		font-size: 24px;
+		width: 24px;
+	}
 	h1{
 		display: table-cell;
 		vertical-align: middle;
-		color: #fff;
-		font-size: 24px;
-		font-weight: 300;
+		font-size: 22px;
+		font-weight: 600;
+		padding: 0 0 0 12px;
 		letter-spacing: 2px;
 	}
 }
@@ -532,4 +554,28 @@ footer{
 	font-weight: 500;
 	border-color: #fff;
 	@include border-radius(6px);
+}
+.logoicon{
+	position: absolute;
+	top: 16px;
+	left: 38%;
+	color: rgba($mainGreenGray, 0.2);
+	i{
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+	}
+	.fa-child{
+		font-size: 24px !important;
+		width:19px !important;
+	}
+	.fa-plus{
+		font-size: 12px;
+		margin: 0 6px;
+		width: 20px;
+	}
+	.fa-car{
+		font-size: 24px;
+		width: 24px;
+	}
 }
