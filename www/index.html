@@ -60,9 +60,26 @@
             </div>
             <div class="second">
                 <div class="header">
-                 <div class="column">
+                    <div class="column">
                         <i id="backToMain" class="fa fa-arrow-left"></i>
                     </div>
+                </div>
+                <div class="second-main">
+                    <form id="addRideForm" novalidate>
+                        <label for="origin">Origin</label>
+                        <input name="origin" placeholder="" required>
+                        <br>
+                        <label for="destination">Destination</label>
+                        <input name="destination" placeholder="" required>
+                        <br>
+                        <label for="seats_available">Available Seats</label>
+                        <input type="number" min="1" name="seats_available" required>
+                        <br>
+                        <label for="pickup_location">Pick up Location</label>
+                        <input name="pickup_location" placeholder="">
+                        <br>
+                        <input type="submit" value="Add Ride">
+                    </form>
                 </div>
             </div>
 
