@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+		<script src="js/googleAutocomplete.js"></script>
+		<script src="js/rideFn.js"></script>
+  	<title>RideSupply</title>
+  </head>
+
+  <body onload="initialize()">
+
+		<form id="addRideForm" novalidate>
+			<label for="origin">Origin</label>
+			<input name="origin" placeholder="" required>
+			<br>
+			<label for="destination">Destination</label>
+			<input name="destination" placeholder="" required>
+			<br>
+			<label for="available_seats">Available Seats</label>
+			<input type="number" min="1" name="available_seats" required>
+			<br>
+			<label for="pick_up_location">Pick up Location</label>
+			<input name="pick_up_location" placeholder="">
+			<br>
+			<input type="submit" value="Add Ride">
+		</form>
+
+	</body>
+</html>
