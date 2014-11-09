@@ -146,10 +146,12 @@ sidebar{
 header{
 	@extend .header;
 	.fa-bars,.fa-search,.fa-times{
+		position: relative;
 		height: 100%;
 		text-align: center;
 		padding-top: 4px;
 		font-size: 32px;
+		z-index: 111;
 	}
 	.column:last-of-type{
 		float: right;
@@ -557,16 +559,20 @@ footer{
 }
 .logoicon{
 	position: absolute;
-	top: 16px;
+	top: 0;
+	padding-top: 18px;
+	left: 0;
 	width: 100%;
 	text-align: center;
 	height: 100%;  
+	z-index: -1;
 	//left: 50vw;
 	color: rgba($mainGreenGray, 0.2);
 	i{
 		display: inline-block;
 		vertical-align: middle;
 		text-align: center;
+		z-index: 1;
 	}
 	.fa-child{
 		font-size: 24px !important;
