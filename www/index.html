@@ -12,6 +12,7 @@
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//use.typekit.net/kgh2tpx.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
+        <script src="js/rideFn.js"></script>
         <title>RideSupply</title>
     </head>
     <body>
@@ -47,10 +48,15 @@
                         {{/each}}
                     </script>
                 </section>
-
-                <footer class="row">
-                    <i class="fa fa-sliders"></i><h3>Filter results</h3>
+                <section class="search">
+                    <div class="row">
+                        <input type="text" placeholder="Where to?">
+                    </div>
+                </section>
+                <footer class="row footer">
+                    <h3>Filter</h3>
                 </footer>
+                <div class="add-ride"><i class="fa fa-plus"></i></div>
             </div>
             <div class="second">
                 <div class="header">
@@ -59,8 +65,6 @@
                     </div>
                 </div>
             </div>
-
-
 
         </div>
 
@@ -121,6 +125,7 @@
         <script type="text/javascript" src="js/index.js"></script>
 
         <script>
+
             window.fbAsyncInit = function() {
                 FB.init({
                     appId      : '320604994809057',
@@ -149,13 +154,6 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
 
-            
-            // var resultsScroll = new Hammer($('.results')[0],{preventDefault:true});
-            // resultsScroll.on("dragup dragdown swipeup swipedown",function(ev){
-            //     //console.log("PANNING UP")
-            //     var xDiff = $('.results').xPos;
-            //     $('.results').velocity({translateY: xDiff})
-            // })
         </script>
     </body>
 </html>

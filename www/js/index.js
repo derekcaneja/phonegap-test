@@ -19,29 +19,35 @@
 var app = {
     // Application Constructor
     initialize: function() {
+        var _this = this;
         this.currentUser = null;
 
         this.bindEvents();
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
         this.searchIcon  = new Hammer($('#openSearch')[0]);
+        this.backIcon  = new Hammer($('#backToMain')[0]);
 
         this.sidebarIcon.on('tap', this.toggleSidebar);
         this.searchIcon.on('tap', this.toggleSearch);
-
+        this.backIcon.on('tap', this.backToMain);
+        // $('.post').each(function(){
+        //     this.indivPost = new Hammer($('.post')[0]);
+        // })
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
-        //$('.results').css('height', $(window).height() - $('header').height() - $('footer').height())
+        $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
 
         $('.post').mouseup(function(ev){
-            $('.app').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
-             // setTimeout(function(){
-             //        $('.app').attr('style', '');
-             //    },250)
+            if($('sidebar').prop('open')){
+                    _this.toggleSidebar();
+                }else{
+                    $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+                }
         }); 
-
+        
         $('#backToMain').mouseup(function(ev){
             $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
             setTimeout(function(){
@@ -175,21 +181,33 @@ var app = {
         var isOpen       = $('sidebar').prop('open');
         var sidebarWidth = $('sidebar').width();
         
+        $('.app').attr('style', '');
+
         if(!isOpen){
             $('#main').velocity({ translateX: sidebarWidth, scale3d: [1,1,1], rotateZ: 0, translateZ: 0}, { duration: 350 }, { easing: 'easeOut'});
+            $('sidebar').prop('open', true);
         } else {
             $('#main').velocity({ translateX: 0, scale3d: [1, 1, 1], rotateZ: 0,translateZ: 0}, { duration: 350 }, { easing: 'easeOut' })
-            
+            console.log("CLOSE")
             setTimeout(function(){
                 $('#main').attr('style', '');
-            }, 400)
+            }, 350)
+            $('sidebar').prop('open', false);
         }
-        
-        $('sidebar').prop('open', !isOpen);
     },
 
-    toggleSearch: function(ev) {
-        console.log('search')
+    toggleSearch: function(e) {
+        $('body').toggleClass('search-active');
+        $('.search').toggleClass('search-active');
+        $('#openSearch').toggleClass('fa-search').toggleClass('fa-times');
+
+    },
+    backToMain: function(ev){
+        $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+        setTimeout(function(){
+                $('.app').attr('style', '');
+
+            },300)
     }
 };
 
