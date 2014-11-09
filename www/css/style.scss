@@ -4,7 +4,7 @@
 $sansSerif: 'proxima-nova', sans-serif;
 
 
-$mainGreenGray: rgba(51, 110, 123,1);
+$mainGreenGray: rgba(103, 65, 114,1);
 $paleRed: rgba(214, 69, 65,1);
 $lightGreen: rgba(27, 188, 155,1);
 
@@ -222,7 +222,7 @@ footer{
 .second{
 	width: 100vw;
 	height: 100vh;
-	background: purple;
+	background: $mainGreenGray;
 	position: absolute;
 	top: 0;
 	left: 100vw;

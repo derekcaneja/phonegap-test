@@ -81,7 +81,7 @@ sidebar {
   top: 0;
   left: 0;
   width: 80vw;
-  background: #336e7b;
+  background: #674172;
   height: 100%;
   z-index: 1; }
   sidebar li {
@@ -117,7 +117,7 @@ header .column:last-of-type {
   height: 60px;
   background: #fff;
   padding: 12px;
-  color: #336e7b; }
+  color: #674172; }
 
 .floating-date {
   text-align: left;
@@ -173,7 +173,7 @@ footer {
 .second {
   width: 100vw;
   height: 100vh;
-  background: purple;
+  background: #674172;
   position: absolute;
   top: 0;
   left: 100vw; }
@@ -202,7 +202,7 @@ footer {
     font-weight: 200;
     outline: none; }
     .search input:focus {
-      color: #2c5e69; }
+      color: #583862; }
 
 .search-active {
   background: #fff;
@@ -226,7 +226,7 @@ footer {
 .post {
   width: 100vw;
   min-height: 200px;
-  border-bottom: 1px solid rgba(51, 110, 123, 0.5);
+  border-bottom: 1px solid rgba(103, 65, 114, 0.5);
   min-height: 160px; }
   .post .column:nth-of-type(1) {
     width: 63.8vw;
@@ -273,7 +273,7 @@ footer {
   .post .price {
     color: #555;
     width: 40% !important;
-    border-right: 1px solid rgba(51, 110, 123, 0.3); }
+    border-right: 1px solid rgba(103, 65, 114, 0.3); }
     .post .price h1 {
       font-weight: 400;
       font-size: 30px !important; }
