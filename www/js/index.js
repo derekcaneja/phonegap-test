@@ -55,7 +55,9 @@ var app = {
         $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
 
-
+        $('.input').focus(function(e){
+            $('label[for="'+$(this).attr('name')+'"]').toggleClass('label-active');
+        })
         $('#backToMain').mouseup(function(ev){
             $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
             setTimeout(function(){
@@ -80,7 +82,7 @@ var app = {
                 var html     = template({ posts: posts });
 
                 $('.results').html(html);
-                
+
         $('.post').mouseup(function(ev){
             if($('sidebar').prop('open')){
                     _this.toggleSidebar();

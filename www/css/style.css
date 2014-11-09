@@ -14,6 +14,34 @@
 .resetFontSize h6, .column * h6 {
   font-size: 12px !important; }
 
+.js-float-label-wrapper {
+  position: relative; }
+
+.js-float-label-wrapper label {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  opacity: 0; }
+
+.js-float-label-wrapper.focused label,
+.js-float-label-wrapper.populated label {
+  opacity: 1; }
+
+.js-float-label-wrapper.focused input,
+.js-float-label-wrapper.populated input,
+.js-float-label-wrapper.focused textarea,
+.js-float-label-wrapper.populated textarea {
+  padding-top: 2em; }
+
+.js-float-label-wrapper input,
+.js-float-label-wrapper textarea,
+.js-float-label-wrapper label {
+  -webkit-transition: 0.2s ease-in-out;
+  -moz-transition: 0.2s ease-in-out;
+  -ms-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out; }
+
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -31,6 +59,9 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0; }
+
+input {
+  outline: none !important; }
 
 ul {
   margin: 0;
@@ -75,7 +106,8 @@ body {
   width: 200vw;
   position: absolute;
   top: 0;
-  left: 0; }
+  left: 0;
+  overflow-x: hidden !important; }
 
 sidebar {
   position: absolute;
@@ -153,7 +185,7 @@ footer {
   width: 100vw;
   z-index: 2;
   background: #fff;
-  overflow: hidden; }
+  overflow-x: hidden !important; }
   #main * {
     max-width: 100vw; }
 
@@ -326,11 +358,70 @@ footer {
     font-size: 32px; }
 
 #addRideForm {
-  text-align: center;
+  text-align: left;
   position: relative;
   width: 100%;
   height: 100vh;
-  padding-top: 60px; }
+  padding: 60px 10vw; }
+  #addRideForm .row {
+    margin: 6px auto; }
+  #addRideForm h2 {
+    width: 100%;
+    text-align: center;
+    color: #674172;
+    margin: 0 0 30px 0; }
+  #addRideForm .inputlabel {
+    margin-left: 7px;
+    width: 100%;
+    opacity: 0;
+    font-size: 12px;
+    color: rgba(103, 65, 114, 0.5);
+    -webkit-transition: opacity, 200ms;
+    -moz-transition: opacity, 200ms;
+    -o-transition: opacity, 200ms;
+    transition: opacity, 200ms; }
+  #addRideForm .label-active {
+    opacity: 1;
+    -webkit-transition: opacity, 200ms;
+    -moz-transition: opacity, 200ms;
+    -o-transition: opacity, 200ms;
+    transition: opacity, 200ms; }
+  #addRideForm .input {
+    width: 100%;
+    padding: 4px 9px;
+    min-height: 52px;
+    color: #674172;
+    border: 1px solid #674172;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px; }
+    #addRideForm .input:-moz-placeholder {
+      color: rgba(103, 65, 114, 0.8); }
+    #addRideForm .input:-ms-input-placeholder {
+      color: rgba(103, 65, 114, 0.8); }
+    #addRideForm .input::-webkit-input-placeholder {
+      color: rgba(103, 65, 114, 0.8); }
+  #addRideForm .numlabel {
+    display: inline-block;
+    color: rgba(103, 65, 114, 0.5);
+    vertical-align: middle; }
+  #addRideForm .inputnum {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16vw;
+    padding: 4px 9px;
+    min-height: 42px;
+    border: 1px solid #674172;
+    color: #674172;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px; }
+    #addRideForm .inputnum:-moz-placeholder {
+      color: rgba(103, 65, 114, 0.8); }
+    #addRideForm .inputnum:-ms-input-placeholder {
+      color: rgba(103, 65, 114, 0.8); }
+    #addRideForm .inputnum::-webkit-input-placeholder {
+      color: rgba(103, 65, 114, 0.8); }
 
 #addride-btn {
   position: absolute;

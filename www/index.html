@@ -58,18 +58,23 @@
                 </div>
                 <div class="second-main">
                     <form id="addRideForm" novalidate>
-                        <label for="origin">Origin</label>
-                        <input name="origin" placeholder="" required>
-                        <br>
-                        <label for="destination">Destination</label>
-                        <input name="destination" placeholder="" required>
-                        <br>
-                        <label for="seats_available">Available Seats</label>
-                        <input type="number" min="1" name="seats_available" required>
-                        <br>
-                        <label for="pickup_location">Pick up Location</label>
-                        <input name="pickup_location" placeholder="">
-                        <br>
+                        <h2>Post about your ride</h2>
+                        <div class="row">
+                            <label class="inputlabel" for="origin">Origin</label>
+                            <input class="input" type="text" name="origin" placeholder="Origin" required>
+                        </div>
+                        <div class="row">
+                            <label  class="inputlabel"for="destination">Destination</label>
+                            <input class="input" type="text" name="destination" placeholder="Destination" required>
+                        </div>
+                        <div class="row">
+                            <label class="numlabel" for="seats_available">Available Seats</label>
+                            <input class="inputnum" type="number" min="1" placeholder="1" name="seats_available" required>
+                        </div>
+                        <div class="row">
+                            <label class="inputlabel" for="pickup_location">Pick up Location</label>
+                            <input class="input" type="text" name="pickup_location" placeholder="Pick up Location">
+                        </div>
                         <input id="addride-btn" type="submit" value="Add Ride">
                     </form>
                 </div>
@@ -163,6 +168,7 @@
         <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
         <script type="text/javascript" src="js/vendor/velocity.min.js"></script>
         <script type="text/javascript" src="js/vendor/handlebars.min.js"></script>
+        <script type="text/javascript" src="js/vendor/floatlabel.js"></script>
         <script type="text/javascript" src="js/vendor/hammer.min.js"></script>
         <script type="text/javascript" src="js/vendor/fastclick.min.js"></script>
 
