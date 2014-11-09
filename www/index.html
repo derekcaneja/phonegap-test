@@ -10,15 +10,18 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="js/fbook_auth.js"></script>
         <script src="//use.typekit.net/kgh2tpx.js"></script>
         <script>try{Typekit.load();}catch(e){}</script>
         <script src="js/rideFn.js"></script>
         <title>RideSupply</title>
     </head>
     <body>
+        <div class="login">
+            <p>Please log in with facebook!</p>
+            <fb:login-button scope="public_profile,email,user_birthday,user_actions.music,user_education_history,user_photos," onlogin="app.createUser();"></fb:login-button>
+        </div>
 
-        <div class="app">
+        <div class="app" style="display:none;opacity:0">
             <sidebar open="false">
                 <div class="logo"><h1>RIDESUPPLY</h1></div>
                 <ul>
@@ -39,241 +42,11 @@
                     </div>
                 </header>
                 <section class="results">
-                    <div class="post">
-                        <div class="floating-date">
-                        <span>November 22, 2014</span>
-                    </div>
-                        <section class="top row">
-                            <div class="column">
-                                <div class="location">
-                                    <div class="row">
-                                        <h4>Boston</h4>
-                                        <i class="fa fa-level-down"></i>
-                                        <h1>Montreal</h1>
-                                    </div>
-                                    <div class="row time-estimate">
-                                        <i class="fa fa-clock-o"></i>
-                                        <h6>Est. 5 hour ride</h6>
-                                    </div>
-                                </div>
-                                <div class="price column">
-                                    <div class="row">
-                                        <div>
-                                            <i class="fa fa-dollar"></i><h1>45</h1>
-                                       </div>
-                                    </div>
-                                </div>
-                                <div class="column seat-availability">
-                                    <div class="row">
-                                        <div>
-                                            <h3>2</h3>
-                                            <h5>Seats</h5>
-                                        </div>
-                                        <!-- <i class="fa fa-circle"></i>
-                                        <i class="fa fa-circle-o"></i>
-                                        <i class="fa fa-circle-o"></i> -->
-                                        <!-- <span>2 seats</span> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="column">
-                                <div class="driver-info">
-                                    <div class="driver-image"></div>
-                                    <h4>Kanye W.</h4>
-                                    <h6>Male, 37</h6>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="post">
-                        <div class="floating-date">
-                        <span>November 22, 2014</span>
-                    </div>
-                        <section class="top row">
-                            <div class="column">
-                                <div class="location">
-                                    <div class="row">
-                                        <h4>Boston</h4>
-                                        <i class="fa fa-level-down"></i>
-                                        <h1>Montreal</h1>
-                                    </div>
-                                    <div class="row time-estimate">
-                                        <i class="fa fa-clock-o"></i>
-                                        <h6>Est. 5 hour ride</h6>
-                                    </div>
-                                </div>
-                                <div class="price column">
-                                    <div class="row">
-                                        <div>
-                                            <i class="fa fa-dollar"></i><h1>45</h1>
-                                       </div>
-                                    </div>
-                                </div>
-                                <div class="column seat-availability">
-                                    <div class="row">
-                                        <div>
-                                            <h3>2</h3>
-                                            <h5>Seats</h5>
-                                        </div>
-                                        <!-- <i class="fa fa-circle"></i>
-                                        <i class="fa fa-circle-o"></i>
-                                        <i class="fa fa-circle-o"></i> -->
-                                        <!-- <span>2 seats</span> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="column">
-                                <div class="driver-info">
-                                    <div class="driver-image"></div>
-                                    <h4>Kanye W.</h4>
-                                    <h6>Male, 37</h6>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="post">
-                        <div class="floating-date">
-                        <span>November 22, 2014</span>
-                    </div>
-                        <section class="top row">
-                            <div class="column">
-                                <div class="location">
-                                    <div class="row">
-                                        <h4>Boston</h4>
-                                        <i class="fa fa-level-down"></i>
-                                        <h1>Montreal</h1>
-                                    </div>
-                                    <div class="row time-estimate">
-                                        <i class="fa fa-clock-o"></i>
-                                        <h6>Est. 5 hour ride</h6>
-                                    </div>
-                                </div>
-                                <div class="price column">
-                                    <div class="row">
-                                        <div>
-                                            <i class="fa fa-dollar"></i><h1>45</h1>
-                                       </div>
-                                    </div>
-                                </div>
-                                <div class="column seat-availability">
-                                    <div class="row">
-                                        <div>
-                                            <h3>2</h3>
-                                            <h5>Seats</h5>
-                                        </div>
-                                        <!-- <i class="fa fa-circle"></i>
-                                        <i class="fa fa-circle-o"></i>
-                                        <i class="fa fa-circle-o"></i> -->
-                                        <!-- <span>2 seats</span> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="column">
-                                <div class="driver-info">
-                                    <div class="driver-image"></div>
-                                    <h4>Kanye W.</h4>
-                                    <h6>Male, 37</h6>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="post">
-                        <div class="floating-date">
-                        <span>November 22, 2014</span>
-                    </div>
-                        <section class="top row">
-                            <div class="column">
-                                <div class="location">
-                                    <div class="row">
-                                        <h4>Boston</h4>
-                                        <i class="fa fa-level-down"></i>
-                                        <h1>Montreal</h1>
-                                    </div>
-                                    <div class="row time-estimate">
-                                        <i class="fa fa-clock-o"></i>
-                                        <h6>Est. 5 hour ride</h6>
-                                    </div>
-                                </div>
-                                <div class="price column">
-                                    <div class="row">
-                                        <div>
-                                            <i class="fa fa-dollar"></i><h1>45</h1>
-                                       </div>
-                                    </div>
-                                </div>
-                                <div class="column seat-availability">
-                                    <div class="row">
-                                        <div>
-                                            <h3>2</h3>
-                                            <h5>Seats</h5>
-                                        </div>
-                                        <!-- <i class="fa fa-circle"></i>
-                                        <i class="fa fa-circle-o"></i>
-                                        <i class="fa fa-circle-o"></i> -->
-                                        <!-- <span>2 seats</span> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="column">
-                                <div class="driver-info">
-                                    <div class="driver-image"></div>
-                                    <h4>Kanye W.</h4>
-                                    <h6>Male, 37</h6>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="post">
-                        <div class="floating-date">
-                        <span>November 22, 2014</span>
-                    </div>
-                        <section class="top row">
-                            <div class="column">
-                                <div class="location">
-                                    <div class="row">
-                                        <h4>Boston</h4>
-                                        <i class="fa fa-level-down"></i>
-                                        <h1>Montreal</h1>
-                                    </div>
-                                    <div class="row time-estimate">
-                                        <i class="fa fa-clock-o"></i>
-                                        <h6>Est. 5 hour ride</h6>
-                                    </div>
-                                </div>
-                                <div class="price column">
-                                    <div class="row">
-                                        <div>
-                                            <i class="fa fa-dollar"></i><h1>45</h1>
-                                       </div>
-                                    </div>
-                                </div>
-                                <div class="column seat-availability">
-                                    <div class="row">
-                                        <div>
-                                            <h3>2</h3>
-                                            <h5>Seats</h5>
-                                        </div>
-                                        <!-- <i class="fa fa-circle"></i>
-                                        <i class="fa fa-circle-o"></i>
-                                        <i class="fa fa-circle-o"></i> -->
-                                        <!-- <span>2 seats</span> -->
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="column">
-                                <div class="driver-info">
-                                    <div class="driver-image"></div>
-                                    <h4>Kanye W.</h4>
-                                    <h6>Male, 37</h6>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                    <script id="post-results" type="text/x-handlebars-template">
+                        {{#each posts}}
+                            <div class="post">{{post user ride}}</div>
+                        {{/each}}
+                    </script>
                 </section>
                 <section class="search">
                     <div class="row">
@@ -293,9 +66,52 @@
                 </div>
             </div>
 
-
-
         </div>
+
+        <script id="post-template" type="text/x-handlebars-template">
+            <div class="floating-date">
+                <span>{{ride.date}}</span>
+            </div>
+            <section class="top row">
+                <div class="column">
+                    <div class="location">
+                        <div class="row">
+                            <h4>{{ride.origin}}</h4>
+                            <i class="fa fa-level-down"></i>
+                            <h1>{{ride.destination}}</h1>
+                        </div>
+                        <div class="row time-estimate">
+                            <i class="fa fa-clock-o"></i>
+                            <h6>Est. {{ride.length}} hour ride</h6>
+                        </div>
+                    </div>
+                    <div class="price column">
+                        <div class="row">
+                            <div>
+                                <i class="fa fa-dollar"></i><h1>{{ride.cost}}</h1>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="column seat-availability">
+                        <div class="row">
+                            <div>
+                                <h3>{{ride.seats_available}}</h3>
+                                <h5>Seats</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="column">
+                    <div class="driver-info">
+                        <div class="driver-image"></div>
+                        <h4>{{user.first_name}} {{substring user.last_name 0 1}}.</h4>
+                        <h6>{{capitalize user.gender 0 1}}, {{age user.birthday}}</h6>
+                    </div>
+                </div>
+            </section>
+        </script>
+
         <script type="text/javascript" src="cordova.js"></script>
 
         <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
@@ -304,6 +120,7 @@
         <script type="text/javascript" src="js/vendor/hammer.min.js"></script>
         <script type="text/javascript" src="js/vendor/fastclick.min.js"></script>
 
+        <script type="text/javascript" src="js/helpers.js"></script>
         <script type="text/javascript" src="js/server.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
@@ -315,6 +132,16 @@
                     cookie     : true,
                     xfbml      : true,
                     version    : 'v2.2'
+                });
+
+                FB.getLoginStatus(function(response) {
+                    if(response.status === 'connected') {
+                        
+                        console.log('User already connected!');
+                        console.log(response)
+
+                        app.setUser(response.authResponse.userID);
+                    }
                 });
             };
             
