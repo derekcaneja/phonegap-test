@@ -233,6 +233,10 @@ footer{
 	@include transition(background 200ms, opacity 200ms);
 	left: 0;
 	opacity: 0;
+	*{
+		opacity: 0;
+		@include transition(opacity, 200ms);
+	}
 	z-index: -1;
 	text-align: center;
 	input{
@@ -252,6 +256,10 @@ footer{
 	z-index: 3;
 	opacity: 1;
 	@include transition(background 300ms, opacity 300ms);
+	*{
+		opacity: 1;
+		@include transition(opacity, 300ms);
+	}
 }
 
 .results{
@@ -464,6 +472,7 @@ footer{
 		padding: 4px 12px;
 		min-height: 52px;
 		color: $mainGreenGray;
+		letter-spacing: 0.7px;
 		border: 1px solid $mainGreenGray;
 		@include border-radius(4px);
 		@include placeholder(rgba($mainGreenGray,0.8));
@@ -472,6 +481,7 @@ footer{
 		display: inline-block;
 		color: rgba($mainGreenGray,0.5);
 		vertical-align: middle;
+		margin-right: 8px;
 
 	}
 	.inputnum{
@@ -491,6 +501,7 @@ footer{
 	position: absolute;
 	left: 10vw;
 	bottom: 12px;
+	color: #fff;
 	width: 80vw;
 	height: 40px;
 	border: none;

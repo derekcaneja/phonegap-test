@@ -217,6 +217,12 @@ footer {
   opacity: 0;
   z-index: -1;
   text-align: center; }
+  .search * {
+    opacity: 0;
+    -webkit-transition: opacity, 200ms;
+    -moz-transition: opacity, 200ms;
+    -o-transition: opacity, 200ms;
+    transition: opacity, 200ms; }
   .search input {
     width: 80%;
     padding: 6px 12px;
@@ -235,6 +241,12 @@ footer {
   -moz-transition: background 300ms, opacity 300ms;
   -o-transition: background 300ms, opacity 300ms;
   transition: background 300ms, opacity 300ms; }
+  .search-active * {
+    opacity: 1;
+    -webkit-transition: opacity, 300ms;
+    -moz-transition: opacity, 300ms;
+    -o-transition: opacity, 300ms;
+    transition: opacity, 300ms; }
 
 .results {
   width: 100vw;
@@ -391,6 +403,7 @@ footer {
     padding: 4px 12px;
     min-height: 52px;
     color: #674172;
+    letter-spacing: 0.7px;
     border: 1px solid #674172;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -404,7 +417,8 @@ footer {
   #addRideForm .numlabel {
     display: inline-block;
     color: rgba(103, 65, 114, 0.5);
-    vertical-align: middle; }
+    vertical-align: middle;
+    margin-right: 8px; }
   #addRideForm .inputnum {
     display: inline-block;
     vertical-align: middle;
@@ -428,6 +442,7 @@ footer {
   position: absolute;
   left: 10vw;
   bottom: 12px;
+  color: #fff;
   width: 80vw;
   height: 40px;
   border: none;

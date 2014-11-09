@@ -220,6 +220,7 @@ var app = {
         $('body').toggleClass('search-active');
         $('.search').toggleClass('search-active');
         $('#openSearch').toggleClass('fa-search').toggleClass('fa-times');
+        $('input#searchbox').focus();
 
     },
     backToMain: function(ev){
