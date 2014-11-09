@@ -37,6 +37,12 @@ ul {
 
 body {
   height: 100vh; }
+  body.search-active .add-ride {
+    display: none; }
+  body.search-active footer {
+    display: none; }
+  body.search-active #openSidebar {
+    display: none; }
 
 .resetFontSize p, .column * p, .resetFontSize span, .column * span, .resetFontSize i, .column * i {
   font-size: 14px !important; }
@@ -120,6 +126,7 @@ header .column:last-of-type {
   display: none; }
 
 footer {
+  width: 100vw;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -173,11 +180,45 @@ footer {
   .second i {
     font-size: 32px; }
 
+.search {
+  padding: 25px 0 0 0;
+  width: 100vw;
+  position: absolute;
+  top: 60px;
+  background: rgba(0, 0, 0, 0);
+  -webkit-transition: background 200ms, opacity 200ms;
+  -moz-transition: background 200ms, opacity 200ms;
+  -o-transition: background 200ms, opacity 200ms;
+  transition: background 200ms, opacity 200ms;
+  left: 0;
+  opacity: 0;
+  z-index: -1;
+  text-align: center; }
+  .search input {
+    width: 80%;
+    padding: 6px 12px;
+    border: none;
+    font-size: 36px;
+    font-weight: 200;
+    outline: none; }
+    .search input:focus {
+      color: #2c5e69; }
+
+.search-active {
+  background: #fff;
+  z-index: 3;
+  opacity: 1;
+  -webkit-transition: background 300ms, opacity 300ms;
+  -moz-transition: background 300ms, opacity 300ms;
+  -o-transition: background 300ms, opacity 300ms;
+  transition: background 300ms, opacity 300ms; }
+
 .results {
   width: 100vw;
   position: absolute;
   top: 60px;
   left: 0;
+  z-index: 1;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; }
@@ -264,6 +305,7 @@ footer {
 
 .add-ride {
   position: absolute;
+  z-index: 5;
   bottom: 50px;
   right: 12px;
   width: 63px;

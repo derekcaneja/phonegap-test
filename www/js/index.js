@@ -37,7 +37,7 @@ var app = {
         $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
-        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
+        $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
 
         $('.post').mouseup(function(ev){
@@ -150,8 +150,11 @@ var app = {
         }
     },
 
-    toggleSearch: function(ev) {
-        console.log('search')
+    toggleSearch: function(e) {
+        $('body').toggleClass('search-active');
+        $('.search').toggleClass('search-active');
+        $('#openSearch').toggleClass('fa-search').toggleClass('fa-times');
+
     },
     backToMain: function(ev){
         $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});

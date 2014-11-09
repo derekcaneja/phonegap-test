@@ -33,6 +33,17 @@ ul{
 }
 body{
 	height: 100vh;
+	&.search-active{
+		.add-ride{
+			display: none;
+		}
+		footer{
+			display: none;
+		}
+		#openSidebar{
+			display: none;
+		}
+	}
 }
 .resetFontSize{
   p,span,i{
@@ -150,6 +161,7 @@ header{
 }
 
 footer{
+	width: 100vw;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -218,12 +230,42 @@ footer{
 		font-size: 32px;
 	}
 }
+.search{
+	padding: 25px 0 0 0;
+	width: 100vw;
+	position: absolute;
+	top: $headerHeight;
+	background: rgba(0,0,0,0);
+	@include transition(background 200ms, opacity 200ms);
+	left: 0;
+	opacity: 0;
+	z-index: -1;
+	text-align: center;
+	input{
+		width: 80%;
+		padding: 6px 12px;
+		border: none;
+		font-size: 36px;
+		font-weight: 200;
+		outline: none;
+		&:focus{
+			color: darken($mainGreenGray,5%);
+		}
+	}
+}
+.search-active{
+	background: #fff;
+	z-index: 3;
+	opacity: 1;
+	@include transition(background 300ms, opacity 300ms);
+}
 
 .results{
 	width: 100vw;
 	position: absolute;
 	top: $headerHeight;
 	left: 0;
+	z-index: 1;
 	//padding-top: 60px;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -342,6 +384,7 @@ footer{
 
 .add-ride{
 	position: absolute;
+	z-index: 5;
 	bottom: 50px;
 	right: 12px;
 	width: 63px;
