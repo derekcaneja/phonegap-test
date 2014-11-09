@@ -7,11 +7,11 @@ var rideFn = {
 				rideFn.addRide(this)
 
 				{
-					user_id: App.currentUser
+					userId: App.currentUser
 					origin: ,
 					destination: ,
-					available_seats: ,
-					pick_up_location: 
+					seats_available: ,
+					pickup_location: 
 				}
   		})
 		})

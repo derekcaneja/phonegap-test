@@ -47,7 +47,7 @@ var app = {
                     $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
                 }
         }); 
-        
+
         $('#backToMain').mouseup(function(ev){
             $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
             setTimeout(function(){
@@ -70,9 +70,7 @@ var app = {
                 var source   = $('#post-results').html();
                 var template = Handlebars.compile(source);
                 var html     = template({ posts: posts });
-
                 console.log(posts)
-
                 $('.results').html(html);
             });
         });
