@@ -51,14 +51,13 @@ var app = {
     initialize: function() {
         var _this = this;
 
-        this.bindEvents();
         this.currentUser = null;
 
         this.pages = {
-            explore          : $('.explore'),
-            my_rides         : $('.my-rides'),
-            add_ride         : $('.add-ride'),
-            account_settings : $('.account-settings')
+            explore          : $('.explore-page'),
+            my_rides         : $('.my-rides-page'),
+            add_ride         : $('.add-ride-page'),
+            account_settings : $('.account-settings-page')
         }
 
         this.setPage('explore');
@@ -70,6 +69,16 @@ var app = {
         $('header i').css('width', $('header').height());
         $('.results,.search').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
         $('.driver-image').css('height', $('.driver-image').width());
+
+        $('.input').focus(function(e){
+            $('label[for="'+$(this).attr('name')+'"]').toggleClass('label-active');
+        })
+        $('#backToMain').mouseup(function(ev){
+            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            setTimeout(function(){
+                    $('.app').attr('style', '');
+                },300)
+        });
 
         Server.get('ride', function(err, rides) {
             Server.get('user', function(err, users) {
@@ -147,7 +156,7 @@ var app = {
     },
 
     setPage: function(page) {
-        $('.app-page').html(this.pages[page].html());
+        $('.app-page').html(app.pages[page].html());
     },
 
     createUser: function() {
@@ -247,6 +256,7 @@ var app = {
         $('body').toggleClass('search-active');
         $('.search').toggleClass('search-active');
         $('#openSearch').toggleClass('fa-search').toggleClass('fa-times');
+        $('input#searchbox').focus();
 
     },
     backToMain: function(ev){
