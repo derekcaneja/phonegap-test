@@ -1,63 +1,78 @@
-(function () {
-
-	var GCM = function() {};
-
-	/**
-	 * Register device with GCM service
-	 * @param senderId - GCM service identifier
-	 * @param eventCallback - {String} - Name of global window function that will handle incoming events from GCM
-	 * @param successCallback - {Function} - called on success on registering device
-	 * @param failureCallback - {Function} - called on failure on registering device
-	 */
-	GCM.prototype.register = function(senderID, eventCallback, successCallback, failureCallback) {
-
-	  if ( typeof eventCallback != "string") {   // The eventCallback has to be a STRING name not the actual routine like success/fail routines
-	    var e = new Array();
-	    e.msg = 'eventCallback must be a STRING name of the routine';
-	    e.rc = -1;
-	    failureCallback( e );
-	    return;
-	  }
-
-	  return Cordova.exec(successCallback,      //Callback which will be called when directory listing is successful
-	              failureCallback,       //Callback which will be called when directory listing encounters an error
-	              'GCMPlugin',        //Telling Cordova that we want to run "DirectoryListing" Plugin
-	              'register',             //Telling the plugin, which action we want to perform
-	              [{ senderID: senderID, ecb : eventCallback }]);          //Passing a list of arguments to the plugin,
-	                          // The ecb variable is the STRING name of your javascript routine to be used for callbacks
-	                          // You can add more to validate that eventCallback is a string and not an object
-	};
+var PushNotification = function() {
+};
 
 
-	/**
-	 * Un-Register device with GCM service
-	 * @param successCallback - {Function} - called on success on un-registering device
-	 * @param failureCallback - {Function} - called on failure on un-registering device
-	 */
-	GCM.prototype.unregister = function( successCallback, failureCallback ) {
+// Call this to register for push notifications. Content of [options] depends on whether we are working with APNS (iOS) or GCM (Android)
+PushNotification.prototype.register = function(successCallback, errorCallback, options) {
+    if (errorCallback == null) { errorCallback = function() {}}
 
-	    return cordova.exec(successCallback,      //Callback which will be called when directory listing is successful
-	              failureCallback,       //Callback which will be called when directory listing encounters an error
-	              'GCMPlugin',        //Telling Cordova that we want to run "DirectoryListing" Plugin
-	              'unregister',             //Telling the plugin, which action we want to perform
-	              [{ }]);          //Passing a list of arguments to the plugin,
-	};
+    if (typeof errorCallback != "function")  {
+        console.log("PushNotification.register failure: failure parameter not a function");
+        return
+    }
 
+    if (typeof successCallback != "function") {
+        console.log("PushNotification.register failure: success callback parameter must be a function");
+        return
+    }
 
-	/*
-	 * register plugin with Phonegap \ Cordova
-	 */
-	if (cordova.addPlugin) {
-	  cordova.addConstructor(function() {
-	    //Register the javascript plugin with Cordova
-	    cordova.addPlugin('GCM', new GCM());
-	  });
-	} else {
-		if (!window.plugins) {
-			window.plugins = {};
-		}
-	  window.plugins.GCM = new GCM();
-	}
+    cordova.exec(successCallback, errorCallback, "PushPlugin", "register", [options]);
+};
 
-	
-})();
+// Call this to unregister for push notifications
+PushNotification.prototype.unregister = function(successCallback, errorCallback, options) {
+    if (errorCallback == null) { errorCallback = function() {}}
+
+    if (typeof errorCallback != "function")  {
+        console.log("PushNotification.unregister failure: failure parameter not a function");
+        return
+    }
+
+    if (typeof successCallback != "function") {
+        console.log("PushNotification.unregister failure: success callback parameter must be a function");
+        return
+    }
+
+     cordova.exec(successCallback, errorCallback, "PushPlugin", "unregister", [options]);
+};
+
+    // Call this if you want to show toast notification on WP8
+    PushNotification.prototype.showToastNotification = function (successCallback, errorCallback, options) {
+        if (errorCallback == null) { errorCallback = function () { } }
+
+        if (typeof errorCallback != "function") {
+            console.log("PushNotification.register failure: failure parameter not a function");
+            return
+        }
+
+        cordova.exec(successCallback, errorCallback, "PushPlugin", "showToastNotification", [options]);
+    }
+// Call this to set the application icon badge
+PushNotification.prototype.setApplicationIconBadgeNumber = function(successCallback, errorCallback, badge) {
+    if (errorCallback == null) { errorCallback = function() {}}
+
+    if (typeof errorCallback != "function")  {
+        console.log("PushNotification.setApplicationIconBadgeNumber failure: failure parameter not a function");
+        return
+    }
+
+    if (typeof successCallback != "function") {
+        console.log("PushNotification.setApplicationIconBadgeNumber failure: success callback parameter must be a function");
+        return
+    }
+
+    cordova.exec(successCallback, errorCallback, "PushPlugin", "setApplicationIconBadgeNumber", [{badge: badge}]);
+};
+
+//-------------------------------------------------------------------
+
+if(!window.plugins) {
+    window.plugins = {};
+}
+if (!window.plugins.pushNotification) {
+    window.plugins.pushNotification = new PushNotification();
+}
+
+if (typeof module != 'undefined' && module.exports) {
+  module.exports = PushNotification;
+}

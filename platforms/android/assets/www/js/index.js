@@ -60,6 +60,7 @@ var app = {
             my_rides         : $('.my-rides-page'),
             add_ride         : $('.add-ride-page'),
             account_settings : $('.account-settings-page'),
+            payment_settings : $('.payment-settings-page'),
             post             : $('.post-page')
         }
 
@@ -72,7 +73,8 @@ var app = {
 
         $('header i.fa-bars, header i.fa-search').css('width', $('header').height());
         $('sidebar ul,.search').css('height', $(window).height() - $('.header').outerHeight());
-        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight())
+        $('.results').css('height', $(window).height() - $('.header').outerHeight() - $('.footer').outerHeight());
+        //$('.logoicon').css('margin-left', $('.logoicon').width()/-2)
         $('.driver-image').css('height', $('.driver-image').width());
 
         $('.input').focus(function(e){

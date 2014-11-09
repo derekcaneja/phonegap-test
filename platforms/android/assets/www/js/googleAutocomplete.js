@@ -1,4 +1,5 @@
-function initialize() {
+var initializeAutocomplete = function() {
+	var autocomplete;
   autocomplete0 = new google.maps.places.Autocomplete(
       (document.getElementsByName('origin')[0]),
       { types: ['(cities)'] });

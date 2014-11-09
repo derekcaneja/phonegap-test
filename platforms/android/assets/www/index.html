@@ -48,6 +48,8 @@
                     <div class="row">
                         <input id="searchbox" type="text" placeholder="Where to?">
                     </div>
+                    <div class="row search-results">
+                    </div>
                 </section>
                 <footer class="row footer">
                     <h3>Filter</h3>
@@ -58,6 +60,9 @@
                 <div class="header">
                     <div class="column">
                         <i id="backToMain" class="fa fa-arrow-left"></i>
+                    </div>
+                    <div class="row logoicon">
+                        <i class="fa fa-child"></i><i class="fa fa-plus"></i><i class="fa fa-car"></i>
                     </div>
                 </div>
                 <div class="second-main">
@@ -172,6 +177,19 @@
             <button class="update-settings">Update</button>
         </section>
 
+        <section class="payment-settings-page" style="display:none">
+            <h2>Update your payment information</h2>
+            <div class="row">
+                <label class="inputlabel" for="origin">Picture</label>
+                <input class="input settings-picture" type="text" name="origin" placeholder="Origin" required>
+            </div>
+            <div class="row">
+                <label class="inputlabel" for="pickup_location">Bio</label>
+                <input class="input settings-bio" type="text" name="pickup_location" placeholder="140 Characters...">
+            </div>
+            <button class="update-settings">Update</button>
+        </section>
+
         <section class="post-page" style="display:none">
             
         </section>
@@ -221,6 +239,14 @@
                     </div>
                 </div>
             </section>
+        </script>
+
+        <script id="ride-template" type="text/x-handlebars-template">
+            
+        </script>
+
+        <script id="confirm-ride-template" type="text/x-handlebars-template">
+            
         </script>
 
         <!-- Javascript Includes -->
