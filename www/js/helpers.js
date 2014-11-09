@@ -11,6 +11,7 @@ Handlebars.registerHelper('post', function(user, ride) {
 });
 
 Handlebars.registerHelper('substring', function(string, start, length) {
+    console.log(string)
     return new Handlebars.SafeString(string.substring(start, length));
 });
 

@@ -16,6 +16,36 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+// var test_key = 'sk_test_l3E5wNlS79TbLhsYbgwsq5uS';
+// var test_pub = 'pk_test_Ep8sKQVZStEonPwes0Ven65h';
+
+// Stripe.setPublishableKey(test_pub);
+
+// Stripe.card.createToken({
+//   number    : $('.card-number').val(),
+//   cvc       : $('.card-cvc').val(),
+//   exp_month : $('.card-expiry-month').val(),
+//   exp_year  : $('.card-expiry-year').val()
+// }, stripeResponseHandler);
+
+function stripeResponseHandler(status, response) {
+  var $form = $('#payment-form');
+
+  if (response.error) {
+    // Show the errors on the form
+    $form.find('.payment-errors').text(response.error.message);
+    $form.find('button').prop('disabled', false);
+  } else {
+    // response contains id and card, which contains additional card details
+    var token = response.id;
+    // Insert the token into the form so it gets submitted to the server
+    $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+    // and submit
+    $form.get(0).submit();
+  }
+}
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -23,33 +53,22 @@ var app = {
 
         this.currentUser = null;
 
+        this.sidePageOpen = false;
+
         this.pages = {
-            explore          : $('.explore'),
-            my_rides         : $('.my-rides'),
-            add_ride         : $('.add-ride'),
-            account_settings : $('.account-settings')
+            explore          : $('.explore-page'),
+            my_rides         : $('.my-rides-page'),
+            add_ride         : $('.add-ride-page'),
+            account_settings : $('.account-settings-page'),
+            post             : $('.post-page')
         }
 
         this.setPage('explore');
-
-        this.bindEvents();
+        this.setSidePage('add_ride');
 
         this.sidebarIcon = new Hammer($('#openSidebar')[0]);
         this.searchIcon  = new Hammer($('#openSearch')[0]);
         this.backIcon    = new Hammer($('#backToMain')[0]);
-
-        this.sidebarIcon.on('tap', this.toggleSidebar);
-        this.searchIcon.on('tap', this.toggleSearch);
-        this.backIcon.on('tap', this.backToMain);
-        // $('.post').each(function(){
-        //     this.indivPost = new Hammer($('.post')[0]);
-        // })
-
-        $('.nav li').mouseup(function() {
-            _this.setPage($(this).data('page'));
-        });
-
-        $('.profile-select').on('click', this.setProfilePicture);
 
         $('header i').css('width', $('header').height());
         $('sidebar ul,.search').css('height', $(window).height() - $('.header').outerHeight());
@@ -58,12 +77,14 @@ var app = {
 
         $('.input').focus(function(e){
             $('label[for="'+$(this).attr('name')+'"]').toggleClass('label-active');
-        })
+        });
+
         $('#backToMain').mouseup(function(ev){
             $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
             setTimeout(function(){
                     $('.app').attr('style', '');
-                },300)
+            }, 300)
         });
 
         Server.get('ride', function(err, rides) {
@@ -84,13 +105,7 @@ var app = {
 
                 $('.results').html(html);
 
-        $('.post').mouseup(function(ev){
-            if($('sidebar').prop('open')){
-                    _this.toggleSidebar();
-                }else{
-                    $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
-                }
-        }); 
+                _this.bindEvents(); 
             });
         });
     },
@@ -99,7 +114,38 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+        var _this = this;
+
         document.addEventListener('deviceready', this.onDeviceReady, false);
+
+        console.log('TEST')
+
+        this.sidebarIcon.on('tap', this.toggleSidebar);
+        this.searchIcon.on('tap', this.toggleSearch);
+        this.backIcon.on('tap', this.backToMain);
+
+        $('.nav li').mouseup(function() {
+            if($(this).data('page')) _this.setPage($(this).data('page'));
+        });
+
+        $('.profile-select').on('click', this.setProfilePicture);
+
+        $('.post').mouseup(function(ev){
+            if($('sidebar').prop('open')) _this.toggleSidebar();
+            else $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+        });
+
+        $('#backToMain').mouseup(function(ev){
+            $('.app').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
+            setTimeout(function(){
+                $('.app').attr('style', '');
+            },300)
+        });
+
+        $('.add-ride').mouseup(function() {
+            _this.toggleSidePage();
+        });
     },
     // deviceready Event Handler
     //
@@ -121,7 +167,16 @@ var app = {
     },
 
     setPage: function(page) {
-        $('.app-page').html(this.pages[page].html());
+        if(page != 'explore') $('.add-ride').hide();
+        else                  $('.add-ride').show();
+
+        if($('sidebar').prop('open')) app.toggleSidebar();
+
+        $('.app-page').html(app.pages[page].html());
+    },
+
+    setSidePage: function(page) {
+        $('.app-side-page').html(app.pages[page].html());
     },
 
     createUser: function() {
@@ -217,6 +272,20 @@ var app = {
         }
     },
 
+    toggleSidePage: function() {
+        if(this.sidePageOpen) {
+            $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
+            
+            setTimeout(function(){
+                $('.app').attr('style', '');
+            },300)
+        } else {
+            $('body').velocity({translateX: $(window).width() *-1, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 250 }, {easing: 'easeOut'});
+        }
+
+        this.sidePageOpen = !this.sidePageOpen;
+    },
+
     toggleSearch: function(e) {
         $('body').toggleClass('search-active');
         $('.search').toggleClass('search-active');
@@ -228,7 +297,6 @@ var app = {
         $('body').velocity({translateX: 0, scale3d: [1,1,1], rotateZ: 0,translateZ: 0}, { duration: 300 }, {easing: 'easeOut'});
         setTimeout(function(){
                 $('.app').attr('style', '');
-
             },300)
     }
 };
