@@ -388,7 +388,7 @@ footer {
     transition: opacity, 200ms; }
   #addRideForm .input {
     width: 100%;
-    padding: 4px 9px;
+    padding: 4px 12px;
     min-height: 52px;
     color: #674172;
     border: 1px solid #674172;
@@ -409,6 +409,7 @@ footer {
     display: inline-block;
     vertical-align: middle;
     width: 16vw;
+    margin: 4px 0 0 0;
     padding: 4px 9px;
     min-height: 42px;
     border: 1px solid #674172;
@@ -434,3 +435,6 @@ footer {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px; }
+
+.alignright {
+  text-align: right; }

@@ -461,7 +461,7 @@ footer{
 	}
 	.input{
 		width: 100%;
-		padding: 4px 9px;
+		padding: 4px 12px;
 		min-height: 52px;
 		color: $mainGreenGray;
 		border: 1px solid $mainGreenGray;
@@ -472,11 +472,13 @@ footer{
 		display: inline-block;
 		color: rgba($mainGreenGray,0.5);
 		vertical-align: middle;
+
 	}
 	.inputnum{
 		display: inline-block;
 		vertical-align: middle;
 		width: 16vw;
+		margin: 4px 0 0 0;
 		padding: 4px 9px;
 		min-height: 42px;
 		border: 1px solid $mainGreenGray;
@@ -495,4 +497,7 @@ footer{
 	background: $paleRed;
 	@include border-radius(6px);
 
+}
+.alignright{
+	text-align: right;
 }
