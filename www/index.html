@@ -232,33 +232,33 @@
 
         <script>
 
-            // window.fbAsyncInit = function() {
-            //     FB.init({
-            //         appId      : '320604994809057',
-            //         cookie     : true,
-            //         xfbml      : true,
-            //         version    : 'v2.2'
-            //     });
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '320604994809057',
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : 'v2.2'
+                });
 
-            //     FB.getLoginStatus(function(response) {
-            //         if(response.status === 'connected') {
+                FB.getLoginStatus(function(response) {
+                    if(response.status === 'connected') {
                         
-            //             console.log('User already connected!');
-            //             console.log(response)
+                        console.log('User already connected!');
+                        console.log(response)
 
-            //             app.setUser(response.authResponse.userID);
-            //         }
-            //     });
-            // };
+                        app.setUser(response.authResponse.userID);
+                    }
+                });
+            };
             
-            // // Load the Facebook SDK asynchronously
-            // (function(d, s, id) {
-            //     var js, fjs = d.getElementsByTagName(s)[0];
-            //     if (d.getElementById(id)) return;
-            //     js = d.createElement(s); js.id = id;
-            //     js.src = "http://connect.facebook.net/en_US/sdk.js";
-            //     fjs.parentNode.insertBefore(js, fjs);
-            // }(document, 'script', 'facebook-jssdk'));
+            // Load the Facebook SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "http://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
 
         </script>
     </body>
